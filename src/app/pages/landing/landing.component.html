@@ -1,67 +1,94 @@
-
 <!-- Navbar -->
 <nav class="bg-white shadow-lg">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-16">
-          <div class="flex-shrink-0">
-              <h1 class="text-2xl font-bold text-blue-600">MiApp</h1>
-          </div>
-          <div class="flex space-x-4">
-              <a [routerLink]="['iniciar-sesion']" class="text-gray-700 hover:text-blue-600">Login</a>
-              <a [routerLink]="['registro']" class="text-gray-700 hover:text-blue-600">Registro</a>
-          </div>
+    <div class="flex justify-between items-center h-16">
+      <div class="flex-shrink-0">
+        <h1 class="text-2xl font-bold text-blue-600">MiApp</h1>
       </div>
+      <div class="flex space-x-4">
+        <a
+          [routerLink]="['iniciar-sesion']"
+          class="text-gray-700 hover:text-blue-600"
+          >Login</a
+        >
+        <a [routerLink]="['registro']" class="text-gray-700 hover:text-blue-600"
+          >Registro</a
+        >
+      </div>
+    </div>
   </div>
 </nav>
 
 <!-- Hero Section -->
-<section class="flex flex-col items-center justify-center text-center bg-blue-600 text-white py-20 px-4">
+<section
+  class="flex flex-col items-center justify-center text-center bg-blue-600 text-white py-20 px-4"
+>
   <h2 class="text-4xl font-bold mb-4">Bienvenido a MiApp</h2>
   <p class="text-lg mb-6 max-w-2xl">
-      Únete a nuestra comunidad y disfruta de una plataforma diseñada para facilitar tu experiencia.
-      Accede a herramientas personalizadas y contenido exclusivo.
+    Únete a nuestra comunidad y disfruta de una plataforma diseñada para
+    facilitar tu experiencia. Accede a herramientas personalizadas y contenido
+    exclusivo.
   </p>
   <div class="space-x-4">
-      <a [routerLink]="['iniciar-sesion']" class="px-6 py-3 bg-white text-blue-600 font-semibold rounded hover:bg-gray-100">
-          Iniciar Sesión
-      </a>
-      <a [routerLink]="['registro']" class="px-6 py-3 bg-white text-blue-600 font-semibold rounded hover:bg-gray-100">
-          Registrarse
-      </a>
+    <a
+      [routerLink]="['iniciar-sesion']"
+      class="px-6 py-3 bg-white text-blue-600 font-semibold rounded hover:bg-gray-100"
+    >
+      Iniciar Sesión
+    </a>
+    <a
+      [routerLink]="['registro']"
+      class="px-6 py-3 bg-white text-blue-600 font-semibold rounded hover:bg-gray-100"
+    >
+      Registrarse
+    </a>
   </div>
 </section>
 
 <!-- Features Section -->
 <section class="max-w-5xl mx-auto my-20 px-4">
-  <h3 class="text-3xl font-bold text-gray-800 text-center mb-10">¿Por qué elegir MiApp?</h3>
+  <h3 class="text-3xl font-bold text-gray-800 text-center mb-10">
+    ¿Por qué elegir MiApp?
+  </h3>
   <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="bg-white p-6 rounded-lg shadow-md">
-          <h4 class="text-xl font-semibold text-blue-600 mb-2">Fácil de usar</h4>
-          <p class="text-gray-600">Una interfaz intuitiva y amigable para todos los usuarios.</p>
-      </div>
-      <div class="bg-white p-6 rounded-lg shadow-md">
-          <h4 class="text-xl font-semibold text-blue-600 mb-2">Seguridad</h4>
-          <p class="text-gray-600">Tus datos están protegidos con las mejores prácticas de seguridad.</p>
-      </div>
-      <div class="bg-white p-6 rounded-lg shadow-md">
-          <h4 class="text-xl font-semibold text-blue-600 mb-2">Soporte dedicado</h4>
-          <p class="text-gray-600">Un equipo listo para ayudarte en cualquier momento.</p>
-      </div>
+    <div class="bg-white p-6 rounded-lg shadow-md">
+      <h4 class="text-xl font-semibold text-blue-600 mb-2">Fácil de usar</h4>
+      <p class="text-gray-600">
+        Una interfaz intuitiva y amigable para todos los usuarios.
+      </p>
+    </div>
+    <div class="bg-white p-6 rounded-lg shadow-md">
+      <h4 class="text-xl font-semibold text-blue-600 mb-2">Seguridad</h4>
+      <p class="text-gray-600">
+        Tus datos están protegidos con las mejores prácticas de seguridad.
+      </p>
+    </div>
+    <div class="bg-white p-6 rounded-lg shadow-md">
+      <h4 class="text-xl font-semibold text-blue-600 mb-2">Soporte dedicado</h4>
+      <p class="text-gray-600">
+        Un equipo listo para ayudarte en cualquier momento.
+      </p>
+    </div>
   </div>
 </section>
 
 <!-- Call to Action Section -->
 <section class="bg-blue-600 text-white py-16 text-center">
   <h3 class="text-3xl font-bold mb-4">¿Listo para comenzar?</h3>
-  <p class="text-lg mb-8">Crea una cuenta o accede a la plataforma para descubrir más.</p>
-  <a href="#register" class="px-6 py-3 bg-white text-blue-600 font-semibold rounded hover:bg-gray-100">
-      Regístrate Ahora
+  <p class="text-lg mb-8">
+    Crea una cuenta o accede a la plataforma para descubrir más.
+  </p>
+  <a
+    href="#register"
+    class="px-6 py-3 bg-white text-blue-600 font-semibold rounded hover:bg-gray-100"
+  >
+    Regístrate Ahora
   </a>
 </section>
 
 <!-- Footer -->
 <footer class="bg-gray-800 text-white py-6">
   <div class="max-w-7xl mx-auto text-center">
-      <p>&copy; 2024 MiApp. Todos los derechos reservados.</p>
+    <p>&copy; 2024 MiApp. Todos los derechos reservados.</p>
   </div>
 </footer>
