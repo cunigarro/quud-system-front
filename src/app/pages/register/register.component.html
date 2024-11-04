@@ -1,110 +1,104 @@
 <div class="flex items-center justify-center h-screen">
-  <!-- Registration Card -->
-  <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
-    <h2 class="text-2xl font-bold text-gray-700 text-center mb-6">
-      Registrarse
-    </h2>
+    <!-- Registration Card -->
+    <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
 
-    <form action="#" method="POST" class="space-y-6">
-      <!-- Nickname Field -->
-      <div>
-        <label for="nickname" class="block text-sm font-medium text-gray-700"
-          >Nickname</label
-        >
-        <input
-          type="text"
-          id="nickname"
-          name="nickname"
-          required
-          class="w-full px-4 py-2 mt-1 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
+      <!-- Link to Landing Page -->
+      <p class="text-center text-sm text-gray-600 mb-4">
+        <a [routerLink]="['/']" class="text-blue-600 hover:underline">Volver a la página principal</a>
+      </p>
 
-      <!-- Nombre Field -->
-      <div>
-        <label for="nombre" class="block text-sm font-medium text-gray-700"
-          >Nombre</label
-        >
-        <input
-          type="text"
-          id="nombre"
-          name="nombre"
-          required
-          class="w-full px-4 py-2 mt-1 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
+      <h2 class="text-2xl font-bold text-gray-700 text-center mb-6">
+        Registrarse
+      </h2>
 
-      <!-- Apellido Field -->
-      <div>
-        <label for="apellido" class="block text-sm font-medium text-gray-700"
-          >Apellido</label
-        >
-        <input
-          type="text"
-          id="apellido"
-          name="apellido"
-          required
-          class="w-full px-4 py-2 mt-1 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
+      <form action="#" method="POST" class="space-y-6">
+        <!-- Nickname Field -->
+        <div>
+          <label for="nickname" class="block text-sm font-medium text-gray-700">Nickname</label>
+          <input
+            type="text"
+            id="nickname"
+            name="nickname"
+            required
+            class="w-full px-4 py-2 mt-1 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
 
-      <!-- Teléfono Field -->
-      <div>
-        <label for="telefono" class="block text-sm font-medium text-gray-700"
-          >Teléfono</label
-        >
-        <input
-          type="tel"
-          id="telefono"
-          name="telefono"
-          required
-          class="w-full px-4 py-2 mt-1 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
+        <!-- Nombre Field -->
+        <div>
+          <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            required
+            class="w-full px-4 py-2 mt-1 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
 
-      <!-- Email Field -->
-      <div>
-        <label for="email" class="block text-sm font-medium text-gray-700"
-          >Correo electrónico</label
-        >
-        <input
-          type="email"
-          id="email"
-          name="email"
-          required
-          class="w-full px-4 py-2 mt-1 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
+        <!-- Apellido Field -->
+        <div>
+          <label for="apellido" class="block text-sm font-medium text-gray-700">Apellido</label>
+          <input
+            type="text"
+            id="apellido"
+            name="apellido"
+            required
+            class="w-full px-4 py-2 mt-1 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
 
-      <!-- Password Field -->
-      <div>
-        <label for="password" class="block text-sm font-medium text-gray-700"
-          >Contraseña</label
-        >
-        <input
-          type="password"
-          id="password"
-          name="password"
-          required
-          class="w-full px-4 py-2 mt-1 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
+        <!-- Teléfono Field -->
+        <div>
+          <label for="telefono" class="block text-sm font-medium text-gray-700">Teléfono</label>
+          <input
+            type="tel"
+            id="telefono"
+            name="telefono"
+            required
+            class="w-full px-4 py-2 mt-1 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
 
-      <!-- Register Button -->
-      <div>
-        <button
-          type="submit"
-          class="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700"
-        >
-          Registrarse
-        </button>
-      </div>
-    </form>
+        <!-- Email Field -->
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700">Correo electrónico</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            class="w-full px-4 py-2 mt-1 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
 
-    <!-- Login Link -->
-    <p class="mt-6 text-center text-sm text-gray-600">
-      ¿Ya tienes una cuenta?
-      <a [routerLink]="['/iniciar-sesion']" class="text-blue-600 hover:underline">Inicia sesión aquí</a>
-    </p>
+        <!-- Password Field -->
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            required
+            class="w-full px-4 py-2 mt-1 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        <!-- Register Button -->
+        <div>
+          <button
+            type="submit"
+            class="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700"
+          >
+            Registrarse
+          </button>
+        </div>
+      </form>
+
+      <!-- Login Link -->
+      <p class="mt-6 text-center text-sm text-gray-600">
+        ¿Ya tienes una cuenta?
+        <a [routerLink]="['/iniciar-sesion']" class="text-blue-600 hover:underline">Inicia sesión aquí</a>
+      </p>
+    </div>
   </div>
-</div>
