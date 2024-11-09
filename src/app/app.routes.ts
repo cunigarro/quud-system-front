@@ -10,11 +10,11 @@ export const routes: Routes = [
     component: LandingComponent
   },
   {
-    path: 'iniciar-sesion',
+    path: 'login',
     component: LoginComponent
   },
   {
-    path: 'registro',
+    path: 'register',
     component: RegisterComponent
   },
   {
