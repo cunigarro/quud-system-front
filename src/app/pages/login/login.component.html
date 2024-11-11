@@ -40,6 +40,7 @@
         <div>
           <button
             type="submit"
+            (click)="login($event)"
             class="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700"
           >
             Sign in
@@ -50,7 +51,7 @@
       <!-- Register Link -->
       <p class="mt-6 text-center text-sm text-gray-600">
         ¿Don't have an account?
-        <a [routerLink]="['/register']" class="text-blue-600 hover:underline">Register here</a>
+        <a [routerLink]="['/register']" class="text-blue-600 hover:underline">Sign up here</a>
       </p>
     </div>
   </div>
