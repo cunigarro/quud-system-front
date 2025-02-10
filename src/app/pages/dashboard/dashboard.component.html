@@ -1,97 +1,10 @@
-<!-- Wrapper -->
-<div class="flex min-h-screen">
-  <!-- Sidebar -->
-  <aside class="w-64 bg-blue-900 text-white flex flex-col">
-    <div class="p-6">
-      <h1 class="text-3xl font-semibold">QuUD</h1>
-      <p class="mt-2 text-sm">Welcome back, Admin!</p>
-    </div>
-    <nav class="flex-1 mt-6">
-      <a href="#" class="block py-3 px-6 text-gray-200 hover:bg-blue-800"
-        >Dashboard</a
-      >
-      <a href="#" class="block py-3 px-6 text-gray-200 hover:bg-blue-800"
-        >Users</a
-      >
-      <a href="#" class="block py-3 px-6 text-gray-200 hover:bg-blue-800"
-        >Settings</a
-      >
-      <a href="#" class="block py-3 px-6 text-gray-200 hover:bg-blue-800"
-        >Reports</a
-      >
-    </nav>
-    <div class="p-6">
-      <button
-        (click)="logout()"
-        class="w-full py-2 px-4 bg-red-600 hover:bg-red-700 rounded"
-      >
-        Logout
-      </button>
-    </div>
-  </aside>
-
-  <!-- Main Content -->
-  <main class="flex-1 p-6">
-    <header class="flex justify-between items-center border-b pb-4 mb-6">
-      <h2 class="text-2xl font-bold">Dashboard</h2>
-      <button
-        class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-      >
-        New Item
-      </button>
-    </header>
-
-    <!-- Stats Section -->
-    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-      <div class="bg-white p-4 rounded-lg shadow-md">
-        <h3 class="text-lg font-semibold text-gray-700">Total Users</h3>
-        <p class="mt-2 text-2xl font-bold text-blue-900">1,250</p>
-      </div>
-      <div class="bg-white p-4 rounded-lg shadow-md">
-        <h3 class="text-lg font-semibold text-gray-700">Revenue</h3>
-        <p class="mt-2 text-2xl font-bold text-blue-900">$25,000</p>
-      </div>
-      <div class="bg-white p-4 rounded-lg shadow-md">
-        <h3 class="text-lg font-semibold text-gray-700">New Orders</h3>
-        <p class="mt-2 text-2xl font-bold text-blue-900">75</p>
-      </div>
-      <div class="bg-white p-4 rounded-lg shadow-md">
-        <h3 class="text-lg font-semibold text-gray-700">Pending Issues</h3>
-        <p class="mt-2 text-2xl font-bold text-blue-900">5</p>
-      </div>
-    </section>
-
-    <!-- Table Section -->
-    <section class="bg-white rounded-lg shadow-md p-6">
-      <h3 class="text-xl font-semibold text-gray-700 mb-4">
-        Recent Activities
-      </h3>
-      <table class="w-full text-left">
-        <thead>
-          <tr>
-            <th class="px-4 py-2 border-b font-semibold">User</th>
-            <th class="px-4 py-2 border-b font-semibold">Action</th>
-            <th class="px-4 py-2 border-b font-semibold">Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="px-4 py-2 border-b">John Doe</td>
-            <td class="px-4 py-2 border-b">Created a new post</td>
-            <td class="px-4 py-2 border-b">2024-11-04</td>
-          </tr>
-          <tr>
-            <td class="px-4 py-2 border-b">Jane Smith</td>
-            <td class="px-4 py-2 border-b">Updated profile</td>
-            <td class="px-4 py-2 border-b">2024-11-03</td>
-          </tr>
-          <tr>
-            <td class="px-4 py-2 border-b">Alice Brown</td>
-            <td class="px-4 py-2 border-b">Deleted a comment</td>
-            <td class="px-4 py-2 border-b">2024-11-02</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-  </main>
+<div class="min-h-screen flex flex-col">
+  <dashboard-header></dashboard-header>
+  <div class="flex flex-1">
+    <dashboard-sidebar></dashboard-sidebar>
+    <main class="flex-1 p-6">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+  <dashboard-footer></dashboard-footer>
 </div>
