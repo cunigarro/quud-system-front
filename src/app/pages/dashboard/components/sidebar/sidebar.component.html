@@ -1,12 +1,12 @@
-<aside class="w-64 bg-slate-950 text-white flex flex-col h-full">
+<aside class="w-64 bg-blue-600 text-white flex flex-col h-full">
   <nav class="flex-1">
-    <a href="register-repositories" class="block py-5 px-6 text-gray-200 hover:bg-white hover:text-slate-950"
+    <a [routerLink]="['register-repositories']" class="block py-5 px-6 text-gray-200 hover:bg-white hover:text-blue-600"
       >Register New Repository</a
     >
-    <a href="evaluate-repositories" class="block py-5 px-6 text-gray-200 hover:bg-white hover:text-slate-950"
+    <a [routerLink]="['evaluate-repositories']" class="block py-5 px-6 text-gray-200 hover:bg-white hover:text-blue-600"
       >Evaluated Repositories</a
     >
-    <a href="evaluate-history" class="block py-5 px-6 text-gray-200 hover:bg-white hover:text-slate-950"
+    <a [routerLink]="['evaluate-history']" class="block py-5 px-6 text-gray-200 hover:bg-white hover:text-blue-600"
       >Evaluation History</a
     >
   </nav>

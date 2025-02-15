@@ -19,6 +19,7 @@ export const routes: Routes = [
   },
   {
     path: 'admin',
-    component: DashboardComponent
+    loadChildren: () => import('./pages/dashboard/dashboard.routes')
+      .then(r => r.dashboardRoutes)
   }
 ];

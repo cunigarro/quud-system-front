@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'dashboard-sidebar',
   templateUrl: './sidebar.component.html',
-  standalone: true
+  standalone: true,
+  imports: [
+    RouterModule
+  ]
 })
 export class SidebarComponent implements OnInit {
   constructor(

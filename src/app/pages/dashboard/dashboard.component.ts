@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { provideRouter, RouterModule } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { routes } from './dashboard.routes';
+import { RouterModule } from '@angular/router';
+import { RegisterReposComponent } from './pages/register-repos/register-repos.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,6 +11,7 @@ import { routes } from './dashboard.routes';
   standalone: true,
   imports: [
     RouterModule,
+    RegisterReposComponent,
     HeaderComponent,
     SidebarComponent,
     FooterComponent

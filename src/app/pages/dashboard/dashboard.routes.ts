@@ -2,13 +2,18 @@ import { EvaluateHistoryComponent } from './pages/evaluation-history/evaluation-
 import { EvaluateReposComponent } from './pages/evalute-repos/evaluate-repos.component';
 import { RegisterReposComponent } from './pages/register-repos/register-repos.component';
 import { DashboardComponent } from './dashboard.component';
+import { Routes } from '@angular/router';
 
-export const routes: any = [
+export const dashboardRoutes: Routes = [
   {
     path: '',
-    redirect: 'register-repositories',
     component: DashboardComponent,
     children: [
+      {
+        path: '',
+        redirectTo: 'register-repositories',
+        pathMatch: 'full'
+      },
       {
         path: 'register-repositories',
         component: RegisterReposComponent,
