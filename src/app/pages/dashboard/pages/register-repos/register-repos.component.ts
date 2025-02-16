@@ -40,7 +40,8 @@ export class RegisterReposComponent {
   });
 
   secondFormGroup = this._formBuilder.group({
-    secondCtrl: ['', Validators.required],
+    branch: ['', Validators.required],
+    qualityRulesGroup: ['', Validators.required],
   });
 
   isLinear = false;
