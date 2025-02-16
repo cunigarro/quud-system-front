@@ -9,26 +9,23 @@
 $my-theme: mat.define-theme((
  color: (
     theme-type: light,
-    primary: mat.$violet-palette,
+    primary: mat.$blue-palette
   ),
 ));
 
-// Aplica el tema globalmente.
 html {
   @include mat.core-theme($my-theme);
 
-  // Estilos de Button
   @include mat.button-theme($my-theme);
 
-  // Estilos de Form Field
   @include mat.form-field-theme($my-theme);
 
-  // Estilos de Input
   @include mat.input-theme($my-theme);
 
-  // Estilos de Stepper
   @include mat.stepper-theme($my-theme);
+}
 
-  // Si usas Typography (opcional):
-  // @include mat.typography-theme($my-theme);
+.mat-stepper-vertical,
+.mat-stepper-horizontal {
+  background-color: #fff !important;
 }

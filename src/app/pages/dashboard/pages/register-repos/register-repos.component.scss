@@ -5,3 +5,10 @@
 .mat-mdc-form-field {
   margin-top: 16px;
 }
+
+/* Opción A: Estilo global directo */
+.mat-mdc-stepper-content,
+.mat-mdc-step-content,
+.mat-mdc-step {
+  background-color: #fff !important;
+}
