@@ -4,12 +4,13 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatButtonModule} from '@angular/material/button';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon'
 import { CommonModule } from '@angular/common';
 import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   templateUrl: './register-repos.component.html',
+  styleUrl: './register-repos.component.scss',
   standalone: true,
   imports: [
     MatButtonModule,
@@ -18,7 +19,8 @@ import { animate, style, transition, trigger } from '@angular/animations';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    CommonModule
+    CommonModule,
+    MatIconModule
   ],
   animations: [
     trigger('horizontalStepTransition', [ // Define the animation here!
