@@ -6,12 +6,29 @@
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel>Register Project</ng-template>
-        <mat-form-field>
-          <mat-label>Name</mat-label>
-          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-        </mat-form-field>
+        <div class="grid grid-cols-2 gap-4">
+          <mat-form-field>
+            <mat-label>Project Name</mat-label>
+            <input matInput formControlName="projectName" required>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>URL Repository</mat-label>
+            <input matInput formControlName="urlRepository" required>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Language</mat-label>
+            <mat-select formControlName="language" required>
+              <mat-option value="Java">Java</mat-option>
+              <mat-option value="Python">Python</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Language Version</mat-label>
+            <input matInput type="number" formControlName="languageVersion" required>
+          </mat-form-field>
+        </div>
         <div>
-          <button mat-button matStepperNext>Next</button>
+          <button mat-button matStepperNext>Register</button>
         </div>
       </form>
     </mat-step>
