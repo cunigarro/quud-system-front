@@ -4,6 +4,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { RegisterReposComponent } from './pages/register-repos/register-repos.component';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,7 +15,8 @@ import { RegisterReposComponent } from './pages/register-repos/register-repos.co
     RegisterReposComponent,
     HeaderComponent,
     SidebarComponent,
-    FooterComponent
+    FooterComponent,
+    UserProfileComponent
   ]
 })
 export class DashboardComponent implements OnInit {

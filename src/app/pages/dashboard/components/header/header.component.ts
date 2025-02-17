@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, model, signal } from '@angular/core';
 import { mdiMenuDown } from '@mdi/js';
 import { SHARED_IMPORTS } from '../../../../shared/shared.imports';
 import { RouterModule } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatDialog } from '@angular/material/dialog';
+import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
 
 @Component({
   selector: 'dashboard-header',
@@ -10,10 +12,21 @@ import { MatMenuModule } from '@angular/material/menu';
   standalone: true,
   imports: [SHARED_IMPORTS, RouterModule, MatMenuModule, RouterModule],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   mdiMenuDown: string = mdiMenuDown;
+  readonly animal = signal('');
+  readonly name = model('');
+  readonly dialog = inject(MatDialog);
 
-  constructor() {}
+  openDialog(): void {
+    const dialogRef = this.dialog.open(UserProfileComponent, {
+      data: { name: this.name(), animal: this.animal() },
+    });
 
-  ngOnInit(): void {}
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result !== undefined) {
+        this.animal.set(result);
+      }
+    });
+  }
 }

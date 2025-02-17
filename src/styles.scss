@@ -21,6 +21,7 @@ html {
   @include mat.stepper-theme($my-theme);
   @include mat.select-theme($my-theme);
   @include mat.menu-theme($my-theme);
+  @include mat.dialog-theme($my-theme);
 }
 
 .mat-stepper-vertical,
