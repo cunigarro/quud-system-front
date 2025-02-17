@@ -4,8 +4,12 @@
       QuuD
     </a>
   </h1>
-  <div>
+  <div mat-button [matMenuTriggerFor]="menu" class="cursor-pointer">
     Christian Unigarro
     <icon class="text-white" [path]="mdiMenuDown"></icon>
   </div>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>Profile</button>
+    <button mat-menu-item [routerLink]="['/']">Log Out</button>
+  </mat-menu>
 </div>

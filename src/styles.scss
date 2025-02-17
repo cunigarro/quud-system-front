@@ -20,6 +20,7 @@ html {
   @include mat.input-theme($my-theme);
   @include mat.stepper-theme($my-theme);
   @include mat.select-theme($my-theme);
+  @include mat.menu-theme($my-theme);
 }
 
 .mat-stepper-vertical,
