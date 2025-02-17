@@ -4,33 +4,43 @@
   </h1>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-
-    <!-- Position Column -->
-    <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef> No. </th>
-      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+    <!-- Project Name Column -->
+    <ng-container matColumnDef="projectName">
+      <th mat-header-cell *matHeaderCellDef> Project Name </th>
+      <td mat-cell *matCellDef="let element"> {{ element.projectName }} </td>
     </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    <!-- Repository Name Column -->
+    <ng-container matColumnDef="repositoryName">
+      <th mat-header-cell *matHeaderCellDef> Repository Name </th>
+      <td mat-cell *matCellDef="let element"> {{ element.repositoryName }} </td>
     </ng-container>
 
-    <!-- Weight Column -->
-    <ng-container matColumnDef="weight">
-      <th mat-header-cell *matHeaderCellDef> Weight </th>
-      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+    <!-- Evaluation Date Column -->
+    <ng-container matColumnDef="evaluationDate">
+      <th mat-header-cell *matHeaderCellDef> Evaluation Date </th>
+      <td mat-cell *matCellDef="let element"> {{ element.evaluationDate }} </td>
     </ng-container>
 
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="symbol">
-      <th mat-header-cell *matHeaderCellDef> Symbol </th>
-      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+    <!-- Score Column -->
+    <ng-container matColumnDef="score">
+      <th mat-header-cell *matHeaderCellDef> Score </th>
+      <td mat-cell *matCellDef="let element"> {{ element.score }} </td>
     </ng-container>
 
+    <!-- Language Column -->
+    <ng-container matColumnDef="language">
+      <th mat-header-cell *matHeaderCellDef> Language </th>
+      <td mat-cell *matCellDef="let element"> {{ element.language }} </td>
+    </ng-container>
+
+    <!-- Criteria Column -->
+    <ng-container matColumnDef="criteria">
+      <th mat-header-cell *matHeaderCellDef> Criteria </th>
+      <td mat-cell *matCellDef="let element"> {{ element.criteria }} </td>
+    </ng-container>
+
+    <!-- Encabezado y filas -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
