@@ -1,13 +1,30 @@
 <aside class="w-64 bg-blue-600 text-white flex flex-col h-full">
   <nav class="flex-1">
-    <a [routerLink]="['register-repositories']" class="block py-5 px-6 text-gray-200 hover:bg-white hover:text-blue-600"
-      >Register New Repository</a
+    <a
+      [routerLink]="['register-repositories']"
+      routerLinkActive="bg-white text-blue-600"
+      class="block py-5 px-6 hover:bg-white hover:text-blue-600 flex justify-between"
     >
-    <a [routerLink]="['evaluate-repositories']" class="block py-5 px-6 text-gray-200 hover:bg-white hover:text-blue-600"
-      >Evaluated Repositories</a
+      Register New Repository
+      <icon [path]="mdiChevronRight"></icon>
+    </a>
+
+    <a
+      [routerLink]="['evaluate-repositories']"
+      routerLinkActive="bg-white text-blue-600"
+      class="block py-5 px-6 hover:bg-white hover:text-blue-600 flex justify-between"
     >
-    <a [routerLink]="['evaluate-history']" class="block py-5 px-6 text-gray-200 hover:bg-white hover:text-blue-600"
-      >Evaluation History</a
+      Evaluated Repositories
+      <icon [path]="mdiChevronRight"></icon>
+    </a>
+
+    <a
+      [routerLink]="['evaluate-history']"
+      routerLinkActive="bg-white text-blue-600"
+      class="block py-5 px-6 hover:bg-white hover:text-blue-600 flex justify-between"
     >
+      Evaluation History
+      <icon [path]="mdiChevronRight"></icon>
+    </a>
   </nav>
 </aside>

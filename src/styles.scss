@@ -15,14 +15,11 @@ $my-theme: mat.define-theme((
 
 html {
   @include mat.core-theme($my-theme);
-
   @include mat.button-theme($my-theme);
-
   @include mat.form-field-theme($my-theme);
-
   @include mat.input-theme($my-theme);
-
   @include mat.stepper-theme($my-theme);
+  @include mat.select-theme($my-theme);
 }
 
 .mat-stepper-vertical,
