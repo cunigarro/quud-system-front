@@ -1,13 +1,30 @@
 import { Component, OnInit } from '@angular/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
 
 @Component({
   templateUrl: './create-rules-group.component.html',
+  styleUrl: './create-rules-group.component.scss',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule],
+  imports: [
+    MatInputModule,
+    MatIconModule,
+    MatChipsModule,
+    MatButtonModule
+  ],
 })
 export class CreateRulesGroupComponent implements OnInit {
+  readonly bestBoys: string[] = [
+    'Encapsulation',
+    'Lines by Class',
+    'Reliability',
+    'Inheritance',
+    'Maintainability',
+    'Efficiency'
+  ];
+
   constructor() {}
 
   ngOnInit(): void {}
