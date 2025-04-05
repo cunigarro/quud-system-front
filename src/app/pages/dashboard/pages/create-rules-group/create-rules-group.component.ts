@@ -16,7 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
   ],
 })
 export class CreateRulesGroupComponent implements OnInit {
-  readonly bestBoys: string[] = [
+  readonly rules: string[] = [
     'Encapsulation',
     'Lines by Class',
     'Reliability',
@@ -25,7 +25,24 @@ export class CreateRulesGroupComponent implements OnInit {
     'Efficiency'
   ];
 
+  selectedRules: string[] = [];
+
   constructor() {}
 
   ngOnInit(): void {}
+
+  toggleSelection(item: string): void {
+    const index = this.selectedRules.indexOf(item);
+    if (index >= 0) {
+      this.selectedRules.splice(index, 1);
+    } else {
+      this.selectedRules.push(item);
+    }
+
+    console.log(this.selectedRules);
+  }
+
+  isSelected(item: string): boolean {
+    return this.selectedRules.includes(item);
+  }
 }
