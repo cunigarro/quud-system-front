@@ -12,4 +12,4 @@ export const environment = {
 `;
 
 fs.writeFileSync(targetPath, fileContent);
-console.log('✅ environment.ts generado desde .env');
+console.log('✅ environment.ts generated from .env');
