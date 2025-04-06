@@ -30,7 +30,10 @@ export class AuthFacade {
   }
 
   logoutUser(): Observable<any> {
-    localStorage.removeItem('token');
-    return this.authService.logout();
+    return this.authService.logout().pipe(
+      tap(() => {
+        localStorage.removeItem('token');
+      })
+    );
   }
 }
