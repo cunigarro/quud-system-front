@@ -1,48 +1,57 @@
 <div class="flex items-center justify-center h-screen">
-    <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
+  <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
+    <p class="text-center text-sm text-gray-600 mb-4">
+      <a [routerLink]="['/']" class="text-blue-600 hover:underline"
+        >Back to the Home Page</a
+      >
+    </p>
 
-      <p class="text-center text-sm text-gray-600 mb-4">
-        <a [routerLink]="['/']" class="text-blue-600 hover:underline">Back to the Home Page</a>
-      </p>
+    <h2 class="text-2xl font-bold text-gray-700 text-center mb-6">Login</h2>
 
-      <h2 class="text-2xl font-bold text-gray-700 text-center mb-6">
-        Login
-      </h2>
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="space-y-6">
+      <mat-form-field class="w-full" appearance="fill">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          formControlName="username"
+          placeholder="ejemplo@correo.com"
+          [errorStateMatcher]="matcher"
+        />
+        @if (loginForm.get('username')?.hasError('email') && !loginForm.get('username')?.hasError('required')) {
+          <mat-error>Please enter a valid email address</mat-error>
+        }
+        @if (loginForm.get('username')?.hasError('required')) {
+          <mat-error>Email is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
 
-      <form [formGroup]="loginForm" (ngSubmit)="login()" class="space-y-6">
-        <div>
-          <label for="username" class="block text-sm font-medium text-gray-700">Email</label>
-          <input
-            type="email"
-            id="username"
-            formControlName="username"
-            class="w-full px-4 py-2 mt-1 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
+      <div>
+        <label for="password" class="block text-sm font-medium text-gray-700"
+          >Password</label
+        >
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          class="w-full px-4 py-2 mt-1 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
 
-        <div>
-          <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-          <input
-            type="password"
-            id="password"
-            formControlName="password"
-            class="w-full px-4 py-2 mt-1 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
+      <div>
+        <button
+          type="submit"
+          class="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700"
+        >
+          Sign in
+        </button>
+      </div>
+    </form>
 
-        <div>
-          <button
-            type="submit"
-            class="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700"
-          >
-            Sign in
-          </button>
-        </div>
-      </form>
-
-      <p class="mt-6 text-center text-sm text-gray-600">
-        ¿Don't have an account?
-        <a [routerLink]="['/register']" class="text-blue-600 hover:underline">Sign up here</a>
-      </p>
-    </div>
+    <p class="mt-6 text-center text-sm text-gray-600">
+      ¿Don't have an account?
+      <a [routerLink]="['/register']" class="text-blue-600 hover:underline"
+        >Sign up here</a
+      >
+    </p>
   </div>
+</div>
