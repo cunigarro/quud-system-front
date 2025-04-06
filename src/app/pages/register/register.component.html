@@ -10,64 +10,73 @@
       </h2>
 
       <form [formGroup]="registerForm" (ngSubmit)="register()" class="space-y-6">
-        <div>
-          <label for="names" class="block text-sm font-medium text-gray-700">Names</label>
+        <mat-form-field class="w-full" appearance="fill">
+          <mat-label>Names</mat-label>
           <input
-            type="text"
-            id="names"
+            matInput
             formControlName="names"
-            class="w-full px-4 py-2 mt-1 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            [errorStateMatcher]="matcher"
           />
-        </div>
+          @if (registerForm.get('names')?.hasError('required')) {
+            <mat-error>Names are <strong>required</strong></mat-error>
+          }
+        </mat-form-field>
 
-        <div>
-          <label for="last_names" class="block text-sm font-medium text-gray-700">Lastnames</label>
+        <mat-form-field class="w-full" appearance="fill">
+          <mat-label>Lastnames</mat-label>
           <input
-            type="text"
-            id="last_names"
+            matInput
             formControlName="last_names"
-            class="w-full px-4 py-2 mt-1 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            [errorStateMatcher]="matcher"
           />
-        </div>
+          @if (registerForm.get('last_names')?.hasError('required')) {
+            <mat-error>Lastnames are <strong>required</strong></mat-error>
+          }
+        </mat-form-field>
 
-        <div>
-          <label for="cellphone" class="block text-sm font-medium text-gray-700">Cellphone</label>
+        <mat-form-field class="w-full" appearance="fill">
+          <mat-label>Cellphone</mat-label>
           <input
-            type="tel"
-            id="cellphone"
+            matInput
             formControlName="cellphone"
-            class="w-full px-4 py-2 mt-1 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            [errorStateMatcher]="matcher"
           />
-        </div>
+          @if (registerForm.get('cellphone')?.hasError('pattern') && !registerForm.get('cellphone')?.hasError('required')) {
+            <mat-error>Cellphone must be exactly 10 numeric digits</mat-error>
+          }
+          @if (registerForm.get('cellphone')?.hasError('required')) {
+            <mat-error>Cellphone is <strong>required</strong></mat-error>
+          }
+        </mat-form-field>
 
-        <div>
-          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+        <mat-form-field class="w-full" appearance="fill">
+          <mat-label>Email</mat-label>
           <input
-            type="email"
-            id="email"
+            matInput
             formControlName="email"
-            class="w-full px-4 py-2 mt-1 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            [errorStateMatcher]="matcher"
           />
-        </div>
+          @if (registerForm.get('email')?.hasError('email') && !registerForm.get('email')?.hasError('required')) {
+            <mat-error>Please enter a valid email address</mat-error>
+          }
+          @if (registerForm.get('email')?.hasError('required')) {
+            <mat-error>Email is <strong>required</strong></mat-error>
+          }
+        </mat-form-field>
 
-        <div>
-          <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+        <mat-form-field class="w-full" appearance="fill">
+          <mat-label>Password</mat-label>
           <input
-            type="password"
-            id="password"
+            matInput
             formControlName="password"
-            class="w-full px-4 py-2 mt-1 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            [errorStateMatcher]="matcher"
           />
-        </div>
+          @if (registerForm.get('password')?.hasError('required')) {
+            <mat-error>Password is <strong>required</strong></mat-error>
+          }
+        </mat-form-field>
 
-        <div>
-          <button
-            type="submit"
-            class="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700"
-          >
-            Sign up
-          </button>
-        </div>
+        <button class="w-full" type="submit" mat-flat-button>Sign up</button>
       </form>
 
       <p class="mt-6 text-center text-sm text-gray-600">

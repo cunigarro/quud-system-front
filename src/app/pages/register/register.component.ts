@@ -1,7 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthFacade } from '../../shared/facades/auth.facade';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-register',
@@ -9,11 +20,15 @@ import { AuthFacade } from '../../shared/facades/auth.facade';
   standalone: true,
   imports: [
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
   ],
 })
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
+  matcher = new MyErrorStateMatcher();
 
   constructor(
     private router: Router,
@@ -25,7 +40,7 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.fb.group({
       names: ['', Validators.required],
       last_names: ['', Validators.required],
-      cellphone: ['', [Validators.required]],
+      cellphone: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });

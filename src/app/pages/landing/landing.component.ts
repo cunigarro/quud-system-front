@@ -8,6 +8,8 @@ import { RouterModule } from '@angular/router';
   imports: [RouterModule],
 })
 export class LandingComponent implements OnInit {
+  currentYear = new Date().getFullYear();
+
   constructor() {}
 
   ngOnInit(): void {}

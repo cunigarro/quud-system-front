@@ -5,6 +5,7 @@ import { AuthFacade } from '../../shared/facades/auth.facade';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -22,7 +23,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     ReactiveFormsModule,
     FormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatButtonModule
   ],
 })
 export class LoginComponent implements OnInit {
