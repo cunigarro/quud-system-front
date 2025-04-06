@@ -1,11 +1,12 @@
+import { LoginResponse, RegisterResponse } from '../models/auth-response.model';
+import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LoginResponse, RegisterResponse } from '../models/auth-response.model';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private baseUrl = 'https://dxn0qz59-8000.use2.devtunnels.ms/auth/api';
+  private baseUrl = `${environment.apiUrl}/auth/api`;
 
   constructor(private http: HttpClient) {}
 
