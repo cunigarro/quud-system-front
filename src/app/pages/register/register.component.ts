@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { AuthService } from '../../shared/services/auth.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthFacade } from '../../shared/facades/auth.facade';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authService: AuthService,
+    private authFacade: AuthFacade,
     private fb: FormBuilder
   ) {}
 
@@ -37,8 +37,9 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    this.authService.register(this.registerForm.value)
-      .subscribe(() => {
+    this.authFacade.registerUser(this.registerForm.value)
+      .subscribe(res => {
+        localStorage.setItem('token', res.token);
         this.router.navigate(['/admin']);
       });
   }
