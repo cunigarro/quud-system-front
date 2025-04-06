@@ -1,8 +1,6 @@
 export interface RegisterResponse {
   data: {
-    token: {
-      access_token: string;
-    };
+    access_token: string;
   };
 }
 

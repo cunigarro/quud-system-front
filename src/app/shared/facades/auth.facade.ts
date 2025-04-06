@@ -10,7 +10,7 @@ export class AuthFacade {
   registerUser(data: any): Observable<{ token: string }> {
     return this.authService.register(data).pipe(
       map((authData: RegisterResponse) => ({
-        token: authData.data.token.access_token
+        token: authData.data.access_token
       })),
       tap(data => {
         localStorage.setItem('token', data.token);
