@@ -14,7 +14,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const currentUrl = this.router.url;
-    const isDashboard = currentUrl.startsWith('/dashboard');
+    const isDashboard = currentUrl.startsWith('/admin');
 
     if (isDashboard) {
       const token = localStorage.getItem('token');

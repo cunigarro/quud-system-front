@@ -38,8 +38,7 @@ export class RegisterComponent implements OnInit {
     }
 
     this.authFacade.registerUser(this.registerForm.value)
-      .subscribe(res => {
-        localStorage.setItem('token', res.token);
+      .subscribe(() => {
         this.router.navigate(['/admin']);
       });
   }

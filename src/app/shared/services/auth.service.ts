@@ -16,4 +16,8 @@ export class AuthService {
   login(credentials: any): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.baseUrl}/login`, credentials);
   }
+
+  logout(): Observable<void> {
+    return this.http.post<void>(`${this.baseUrl}/logout`, {});
+  }
 }

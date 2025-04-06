@@ -35,8 +35,7 @@ export class LoginComponent implements OnInit {
     }
 
     this.authFacade.loginUser(this.loginForm.value)
-      .subscribe(res => {
-        localStorage.setItem('token', res.token);
+      .subscribe(() => {
         this.router.navigate(['/admin']);
       });
   }
