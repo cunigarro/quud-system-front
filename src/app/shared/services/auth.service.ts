@@ -1,4 +1,4 @@
-import { LoginResponse, RegisterResponse } from '../models/auth-response.model';
+import { LoginResponse, RegisterResponse } from '../models/auth.model';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';

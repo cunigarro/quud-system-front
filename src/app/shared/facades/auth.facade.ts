@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { map, Observable, tap } from 'rxjs';
-import { LoginResponse, RegisterResponse } from '../models/auth-response.model';
+import { LoginResponse, RegisterResponse } from '../models/auth.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthFacade {

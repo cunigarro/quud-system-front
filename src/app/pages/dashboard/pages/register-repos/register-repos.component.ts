@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, Signal } from '@angular/core';
 import {
   FormBuilder,
   Validators,
@@ -12,6 +12,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
+import { LanguageFacade } from '../../../../shared/facades/language.facade';
+import { Language } from '../../../../shared/models/language.model';
 
 @Component({
   templateUrl: './register-repos.component.html',
@@ -29,8 +31,10 @@ import { MatSelectModule } from '@angular/material/select';
     MatSelectModule,
   ],
 })
-export class RegisterReposComponent {
+export class RegisterReposComponent implements OnInit {
   private _formBuilder = inject(FormBuilder);
+  isLinear = false;
+  languages!: Signal<Language[] | null>;
 
   firstFormGroup = this._formBuilder.group({
     projectName: ['', Validators.required],
@@ -44,5 +48,12 @@ export class RegisterReposComponent {
     qualityRulesGroup: ['', Validators.required],
   });
 
-  isLinear = false;
+  constructor(
+    private languageFacade: LanguageFacade
+  ){}
+
+  ngOnInit(): void {
+    this.languageFacade.loadLanguages();
+    this.languages = this.languageFacade.languages;
+  }
 }

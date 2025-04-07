@@ -18,8 +18,11 @@
           <mat-form-field>
             <mat-label>Language</mat-label>
             <mat-select formControlName="language" required>
-              <mat-option value="Java">Java</mat-option>
-              <mat-option value="Python">Python</mat-option>
+              @for (lang of languages(); track lang.uuid) {
+                <mat-option [value]="lang.uuid">
+                  {{ lang.name }}
+                </mat-option>
+              }
             </mat-select>
           </mat-form-field>
           <mat-form-field>
