@@ -30,6 +30,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   matcher = new MyErrorStateMatcher();
+  isLoading = false;
 
   constructor(
     private router: Router,
@@ -50,8 +51,11 @@ export class LoginComponent implements OnInit {
       return;
     }
 
+    this.isLoading = true;
+
     this.authFacade.loginUser(this.loginForm.value)
       .subscribe(() => {
+        this.isLoading = false;
         this.router.navigate(['/admin']);
       });
   }

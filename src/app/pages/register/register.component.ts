@@ -29,6 +29,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   matcher = new MyErrorStateMatcher();
+  isLoading = false;
 
   constructor(
     private router: Router,
@@ -52,8 +53,11 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
+    this.isLoading = true;
+
     this.authFacade.registerUser(this.registerForm.value)
       .subscribe(() => {
+        this.isLoading = false;
         this.router.navigate(['/admin']);
       });
   }
