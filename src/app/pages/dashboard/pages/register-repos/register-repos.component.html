@@ -28,9 +28,13 @@
             </mat-select>
           </mat-form-field>
           <mat-form-field>
-            <mat-label>Language</mat-label>
+            <mat-label>Language Version</mat-label>
             <mat-select formControlName="languageVersion" required>
-
+              @if (selectedLanguageVersions()) {
+                @for (version of selectedLanguageVersions(); track version.id) {
+                  <mat-option [value]="version.id">{{ version.version }}</mat-option>
+                }
+              }
             </mat-select>
           </mat-form-field>
         </div>

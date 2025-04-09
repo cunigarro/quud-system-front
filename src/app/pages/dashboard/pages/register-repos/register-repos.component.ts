@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, Signal } from '@angular/core';
+import { Component, inject, OnInit, signal, Signal } from '@angular/core';
 import {
   FormBuilder,
   Validators,
@@ -13,7 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { LanguageFacade } from '../../../../shared/facades/language.facade';
-import { Language } from '../../../../shared/models/language.model';
+import { Language, LanguageVersion } from '../../../../shared/models/language.model';
 
 @Component({
   templateUrl: './register-repos.component.html',
@@ -35,6 +35,7 @@ export class RegisterReposComponent implements OnInit {
   private _formBuilder = inject(FormBuilder);
   isLinear = false;
   languages!: Signal<Language[] | null>;
+  selectedLanguageVersions = signal<LanguageVersion[] | null>(null);
 
   firstFormGroup = this._formBuilder.group({
     projectName: ['', Validators.required],
@@ -55,5 +56,20 @@ export class RegisterReposComponent implements OnInit {
   ngOnInit(): void {
     this.languageFacade.loadLanguages();
     this.languages = this.languageFacade.languages;
+
+    this.firstFormGroup.get('language')?.valueChanges.subscribe(selectedUuid => {
+      const lang = this.languages()?.find(l => l.uuid === selectedUuid);
+      this.selectedLanguageVersions.set(lang?.versions ?? null);
+
+      if (!lang) {
+        this.firstFormGroup.get('languageVersion')?.disable();
+      } else {
+        this.firstFormGroup.get('languageVersion')?.enable();
+      }
+
+      this.firstFormGroup.get('languageVersion')?.reset();
+    });
+
+    this.firstFormGroup.get('languageVersion')?.disable();
   }
 }
