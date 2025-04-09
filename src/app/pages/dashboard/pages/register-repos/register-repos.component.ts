@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { LanguageFacade } from '../../../../shared/facades/language.facade';
 import { Language, LanguageVersion } from '../../../../shared/models/language.model';
+import { ProjectsFacade } from '../../../../shared/facades/projects.facade';
 
 @Component({
   templateUrl: './register-repos.component.html',
@@ -38,10 +39,10 @@ export class RegisterReposComponent implements OnInit {
   selectedLanguageVersions = signal<LanguageVersion[] | null>(null);
 
   firstFormGroup = this._formBuilder.group({
-    projectName: ['', Validators.required],
-    urlRepository: ['', Validators.required],
-    language: ['', Validators.required],
-    languageVersion: ['', Validators.required],
+    name: ['', Validators.required],
+    url: ['', Validators.required],
+    language_id: ['', Validators.required],
+    language_version_id: ['', Validators.required],
   });
 
   secondFormGroup = this._formBuilder.group({
@@ -50,26 +51,38 @@ export class RegisterReposComponent implements OnInit {
   });
 
   constructor(
-    private languageFacade: LanguageFacade
+    private languageFacade: LanguageFacade,
+    private projectsFacade: ProjectsFacade
   ){}
 
   ngOnInit(): void {
     this.languageFacade.loadLanguages();
     this.languages = this.languageFacade.languages;
 
-    this.firstFormGroup.get('language')?.valueChanges.subscribe(selectedUuid => {
+    this.firstFormGroup.get('language_id')?.valueChanges.subscribe(selectedUuid => {
       const lang = this.languages()?.find(l => l.uuid === selectedUuid);
       this.selectedLanguageVersions.set(lang?.versions ?? null);
 
       if (!lang) {
-        this.firstFormGroup.get('languageVersion')?.disable();
+        this.firstFormGroup.get('language_version_id')?.disable();
       } else {
-        this.firstFormGroup.get('languageVersion')?.enable();
+        this.firstFormGroup.get('language_version_id')?.enable();
       }
 
-      this.firstFormGroup.get('languageVersion')?.reset();
+      this.firstFormGroup.get('language_version_id')?.reset();
     });
 
-    this.firstFormGroup.get('languageVersion')?.disable();
+    this.firstFormGroup.get('language_version_id')?.disable();
+  }
+
+  registerProject() {
+    if (this.firstFormGroup.invalid) {
+      this.firstFormGroup.markAllAsTouched();
+      return;
+    }
+
+    this.projectsFacade.createProject(this.firstFormGroup.value)
+      .subscribe(() => {
+      });
   }
 }
