@@ -1,16 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormGroupDirective, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  FormsModule,
+  NgForm,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthFacade } from '../../shared/facades/auth.facade';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
+import { SHARED_IMPORTS } from '../../shared/shared.imports';
+import { finalize } from 'rxjs';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
     const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+    return !!(
+      control &&
+      control.invalid &&
+      (control.dirty || control.touched || isSubmitted)
+    );
   }
 }
 
@@ -24,13 +42,15 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    SHARED_IMPORTS,
   ],
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   matcher = new MyErrorStateMatcher();
   isLoading = false;
+  showAlert = false;
 
   constructor(
     private router: Router,
@@ -41,7 +61,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
     });
   }
 
@@ -53,10 +73,14 @@ export class LoginComponent implements OnInit {
 
     this.isLoading = true;
 
-    this.authFacade.loginUser(this.loginForm.value)
-      .subscribe(() => {
-        this.isLoading = false;
+    this.authFacade.loginUser(this.loginForm.value).subscribe({
+      next: () => {
         this.router.navigate(['/admin']);
-      });
+      },
+      error: () => {
+        this.showAlert = true;
+        this.isLoading = false;
+      },
+    });
   }
 }
