@@ -11,11 +11,12 @@
               {{ evaluation.name }}
             </p>
             <ul class="list-disc text-sm pl-5 mb-3">
-              <li>Lines of Code Evaluated: </li>
-              <li>Score: 400</li>
-              <li>Amount of Files: 40</li>
-              <li>Branch Name: main</li>
-              <li>Evaluation Date: 03/11/2024</li>
+              <li>Language: </li>
+              <li>Url Repo: {{ evaluation.url }}</li>
+              <li>Branch Name: {{ evaluation.branch }}</li>
+              <li>Create Project Date: {{ evaluation.created_at }}</li>
+              <li>Update Project Date: {{ evaluation.updated_at }}</li>
+              <li>Rule Group Name: </li>
             </ul>
             <button class="w-full" mat-flat-button>View Detail</button>
           </mat-card-content>
