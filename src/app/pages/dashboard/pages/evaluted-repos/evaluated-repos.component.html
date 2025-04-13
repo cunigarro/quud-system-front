@@ -18,7 +18,11 @@
               <li>Update Project Date: {{ evaluation.updated_at }}</li>
               <li>Rule Group Name: </li>
             </ul>
-            <button class="w-full" mat-flat-button>View Detail</button>
+            @if (!evaluation.branch) {
+              <button class="w-full" mat-stroked-button>Inspect Project</button>
+            } @else {
+              <button class="w-full" mat-flat-button>Inspection Details</button>
+            }
           </mat-card-content>
         </mat-card>
       }
