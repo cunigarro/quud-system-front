@@ -19,13 +19,6 @@ export class InspectionsFacade {
     if (!this._inspections()) {
       return this.inspectionsService.inspections()
         .pipe(
-          catchError(() => of([
-            {
-              branch: 'main',
-              project_id: 1,
-              rule_group_id: 1
-            }
-          ])),
           tap((data) => this._inspections.set(data))
         );
     }

@@ -19,19 +19,20 @@ export class EvaluationsFacade {
       inspections: this.inspectionsFacade.loadInspections()
     }).pipe(
       map(({ projects, inspections }) => {
-        const evaluation: Evaluation[] = projects
-          .map(project => {
-            const inspection = inspections.find(i => i.project_id === project.id);
-            if (!inspection) return null;
+        const evaluations: Evaluation[] = projects.map(project => {
+          const inspection = inspections.find(i => i.project_id === project.id);
 
-            return {
-              ...project,
-              ...inspection
-            } as Evaluation;
-          })
-          .filter((e): e is Evaluation => e !== null);
+          const evaluation: Evaluation = {
+            ...project,
+            branch: inspection?.branch ?? '',
+            project_id: inspection?.project_id ?? project.id,
+            rule_group_id: inspection?.rule_group_id ?? 0
+          };
 
-        this._evaluations.set(evaluation);
+          return evaluation;
+        });
+
+        this._evaluations.set(evaluations);
       })
     ).subscribe();
   }

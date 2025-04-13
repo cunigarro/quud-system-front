@@ -19,18 +19,6 @@ export class ProjectsFacade {
     if (!this._projects()) {
       return this.projectsService.projects()
         .pipe(
-          catchError(() => {
-            return of([
-              {
-                id: 1,
-                name: 'Proyecto de respaldo',
-                updated_at: new Date(),
-                created_at: new Date(),
-                language_version_id: 1,
-                url: 'https://github.com/cunigarro/quud'
-              }
-            ]);
-          }),
           tap((data) => this._projects.set(data))
         )
     }

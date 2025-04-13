@@ -2,7 +2,7 @@ import { LoginResponse, RegisterResponse } from '../models/auth.model';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { CreateProjectDto, CreateProjectResponse, Project } from '../models/project.model';
 
 @Injectable({ providedIn: 'root' })
@@ -16,6 +16,9 @@ export class ProjecstService {
   }
 
   projects(): Observable<Project[]> {
-    return this.http.get<Project[]>(`${this.baseUrl}/`);
+    return this.http.get<Project[]>(`${this.baseUrl}/`)
+      .pipe(
+        map((res: any) => res.data)
+      );
   }
 }
