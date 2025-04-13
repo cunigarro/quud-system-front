@@ -15,6 +15,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { LanguageFacade } from '../../../../shared/facades/language.facade';
 import { Language, LanguageVersion } from '../../../../shared/models/language.model';
 import { ProjectsFacade } from '../../../../shared/facades/projects.facade';
+import { CreateProjectDto } from '../../../../shared/models/project.model';
 
 @Component({
   templateUrl: './register-repos.component.html',
@@ -42,7 +43,7 @@ export class RegisterReposComponent implements OnInit {
     name: ['', Validators.required],
     url: ['', Validators.required],
     language_id: [null, Validators.required],
-    language_version_id: ['', Validators.required],
+    language_version_id: [null, Validators.required],
   });
 
   secondFormGroup = this._formBuilder.group({
@@ -81,7 +82,16 @@ export class RegisterReposComponent implements OnInit {
       return;
     }
 
-    this.projectsFacade.createProject(this.firstFormGroup.value)
+    const formValue = this.firstFormGroup.value;
+
+    const dto: CreateProjectDto = {
+      name: formValue.name!,
+      url: formValue.url!,
+      language_id: formValue.language_id!,
+      language_version_id: formValue.language_version_id!,
+    };
+
+    this.projectsFacade.createProject(dto)
       .subscribe(() => {
       });
   }

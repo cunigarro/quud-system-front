@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { ProjectsFacade } from '../../../../shared/facades/projects.facade';
+import { Project } from '../../../../shared/models/project.model';
 
 @Component({
   templateUrl: './evaluated-repos.component.html',
@@ -8,7 +10,14 @@ import { MatCardModule } from '@angular/material/card';
   imports: [MatCardModule, MatButtonModule],
 })
 export class EvaluatedReposComponent implements OnInit {
-  constructor() {}
+  projects!: Signal<Project[] | null>;
 
-  ngOnInit(): void {}
+  constructor(
+    private projectsFacade: ProjectsFacade
+  ) {}
+
+  ngOnInit(): void {
+    this.projectsFacade.loadProjects();
+    this.projects = this.projectsFacade.projects;
+  }
 }

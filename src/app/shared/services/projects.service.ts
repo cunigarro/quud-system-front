@@ -3,6 +3,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { CreateProjectDto, CreateProjectResponse, Project } from '../models/project.model';
 
 @Injectable({ providedIn: 'root' })
 export class ProjecstService {
@@ -10,7 +11,11 @@ export class ProjecstService {
 
   constructor(private http: HttpClient) {}
 
-  createProject(data: any): Observable<RegisterResponse> {
-    return this.http.post<RegisterResponse>(`${this.baseUrl}/`, data);
+  createProject(data: CreateProjectDto): Observable<CreateProjectResponse> {
+    return this.http.post<CreateProjectResponse>(`${this.baseUrl}/`, data);
+  }
+
+  projects(): Observable<Project[]> {
+    return this.http.get<Project[]>(`${this.baseUrl}/`);
   }
 }
