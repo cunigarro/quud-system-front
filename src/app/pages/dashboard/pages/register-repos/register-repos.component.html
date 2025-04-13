@@ -19,8 +19,8 @@
             <mat-label>Language</mat-label>
             <mat-select formControlName="language_id" required>
               @if (languages()) {
-                @for (lang of languages(); track lang.uuid) {
-                  <mat-option [value]="lang.uuid">
+                @for (lang of languages(); track lang.id) {
+                  <mat-option [value]="lang.id">
                     {{ lang.name }}
                   </mat-option>
                 }

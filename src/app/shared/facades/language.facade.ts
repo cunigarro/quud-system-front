@@ -13,7 +13,15 @@ export class LanguageFacade {
   loadLanguages() {
     if (!this._languages()) {
       this.languageService.language().subscribe({
-        next: (langs) => this._languages.set(langs.data),
+        next: (langs) => {
+          const data = langs.data.map((l,i) => {
+            return {
+              ...l,
+              id: i + 1
+            }
+          })
+          this._languages.set(data)
+        },
         error: (err) => console.error('Error loading languages', err),
       });
     }

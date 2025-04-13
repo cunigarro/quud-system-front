@@ -6,6 +6,7 @@ export interface LanguageResponse {
 
 export interface Language {
   name: string;
+  id: number;
   uuid: string;
   versions: LanguageVersion[];
 }

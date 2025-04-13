@@ -41,7 +41,7 @@ export class RegisterReposComponent implements OnInit {
   firstFormGroup = this._formBuilder.group({
     name: ['', Validators.required],
     url: ['', Validators.required],
-    language_id: ['', Validators.required],
+    language_id: [null, Validators.required],
     language_version_id: ['', Validators.required],
   });
 
@@ -59,8 +59,8 @@ export class RegisterReposComponent implements OnInit {
     this.languageFacade.loadLanguages();
     this.languages = this.languageFacade.languages;
 
-    this.firstFormGroup.get('language_id')?.valueChanges.subscribe(selectedUuid => {
-      const lang = this.languages()?.find(l => l.uuid === selectedUuid);
+    this.firstFormGroup.get('language_id')?.valueChanges.subscribe(selectedId => {
+      const lang = this.languages()?.find(l => l.id === selectedId);
       this.selectedLanguageVersions.set(lang?.versions ?? null);
 
       if (!lang) {
