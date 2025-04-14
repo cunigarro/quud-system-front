@@ -1,11 +1,11 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { ProjecstService } from '../services/projects.service';
+import { ProjectsService } from '../services/projects.service';
 import { catchError, finalize, map, Observable, of, tap } from 'rxjs';
 import { CreateProjectDto, CreateProjectResponse, Project } from '../models/project.model';
 
 @Injectable({ providedIn: 'root' })
 export class ProjectsFacade {
-  private projectsService = inject(ProjecstService);
+  private projectsService = inject(ProjectsService);
 
   private _projects = signal<Project[] | null>(null);
 

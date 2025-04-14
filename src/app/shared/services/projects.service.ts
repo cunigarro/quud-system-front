@@ -6,7 +6,7 @@ import { map, Observable } from 'rxjs';
 import { CreateProjectDto, CreateProjectResponse, Project } from '../models/project.model';
 
 @Injectable({ providedIn: 'root' })
-export class ProjecstService {
+export class ProjectsService {
   private baseUrl = `${environment.apiUrl}/api/v1/projects`;
 
   constructor(private http: HttpClient) {}

@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit, Signal } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonModule } from '@angular/material/button';
+import { RulesFacade } from '../../../../shared/facades/rules.facade';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   templateUrl: './create-rules-group.component.html',
@@ -12,24 +14,22 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatIconModule,
     MatChipsModule,
-    MatButtonModule
+    MatButtonModule,
+    JsonPipe
   ],
 })
 export class CreateRulesGroupComponent implements OnInit {
-  readonly rules: string[] = [
-    'Encapsulation',
-    'Lines by Class',
-    'Reliability',
-    'Inheritance',
-    'Maintainability',
-    'Efficiency'
-  ];
+  rulesFacade = inject(RulesFacade);
+  rules!: Signal<any[] | null>;
 
   selectedRules: string[] = [];
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.rulesFacade.loadRules();
+    this.rules = this.rulesFacade.rules;
+  }
 
   toggleSelection(item: string): void {
     const index = this.selectedRules.indexOf(item);

@@ -4,15 +4,22 @@
   </h1>
   <form>
     <mat-form-field class="w-full">
-      <mat-label>Create rules group name</mat-label>
+      <mat-label>Name</mat-label>
       <input type="text" matInput>
     </mat-form-field>
 
+    <mat-form-field class="w-full">
+      <mat-label>Description</mat-label>
+      <textarea rows="3" matInput placeholder="Add rules description"></textarea>
+    </mat-form-field>
+
     <mat-chip-listbox class="mb-5" aria-label="Rules" multiple>
-      @for (rule of rules; track rule) {
-        <mat-chip-option>
-          {{ rule }}
-        </mat-chip-option>
+      @if (rules()) {
+        @for (rule of rules(); track rule.id) {
+          <mat-chip-option [value]="rule.id">
+            {{ rule.name }}
+          </mat-chip-option>
+        }
       }
     </mat-chip-listbox>
     <div class="flex justify-end">

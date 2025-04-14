@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 import { Inspection, InspectionResponse } from '../models/inspection.model';
 
 @Injectable({ providedIn: 'root' })
-export class ProjecstService {
+export class ProjectsService {
   private baseUrl = `${environment.apiUrl}/api/v1/inspections`;
 
   constructor(private http: HttpClient) {}
