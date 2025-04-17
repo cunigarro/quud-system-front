@@ -5,6 +5,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonModule } from '@angular/material/button';
 import { RulesFacade } from '../../../../shared/facades/rules.facade';
 import { JsonPipe } from '@angular/common';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   templateUrl: './create-rules-group.component.html',
@@ -15,10 +16,16 @@ import { JsonPipe } from '@angular/common';
     MatIconModule,
     MatChipsModule,
     MatButtonModule,
-    JsonPipe
+    ReactiveFormsModule
   ],
 })
 export class CreateRulesGroupComponent implements OnInit {
+  private _formBuilder = inject(FormBuilder);
+  createRulesForm = this._formBuilder.group({
+    name: ['', Validators.required],
+    description: ['', Validators.required],
+    rule_ids: [[]]
+  });
   rulesFacade = inject(RulesFacade);
   rules!: Signal<any[] | null>;
 
@@ -38,11 +45,23 @@ export class CreateRulesGroupComponent implements OnInit {
     } else {
       this.selectedRules.push(item);
     }
-
-    console.log(this.selectedRules);
   }
 
   isSelected(item: string): boolean {
     return this.selectedRules.includes(item);
+  }
+
+  createRules(): void {
+    if (this.createRulesForm.invalid) {
+      this.createRulesForm.markAllAsTouched();
+      return;
+    }
+
+    const formValue = this.createRulesForm.value;
+
+    this.rulesFacade.createRulesGroup(formValue)
+      .subscribe(() => {
+        console.log('Rules created.');
+      });
   }
 }

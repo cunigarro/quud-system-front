@@ -2,26 +2,30 @@
   <h1 class="mb-5 font-bold text-xl">
     Create Rules Group
   </h1>
-  <form>
+  <form [formGroup]="createRulesForm" (ngSubmit)="createRules()" class="space-y-6">
     <mat-form-field class="w-full">
       <mat-label>Name</mat-label>
-      <input type="text" matInput>
+      <input formControlName="name" type="text" matInput>
     </mat-form-field>
 
     <mat-form-field class="w-full">
       <mat-label>Description</mat-label>
-      <textarea rows="3" matInput placeholder="Add rules description"></textarea>
+      <textarea formControlName="description" rows="3" matInput placeholder="Add rules description"></textarea>
     </mat-form-field>
 
-    <mat-chip-listbox class="mb-5" aria-label="Rules" multiple>
-      @if (rules()) {
-        @for (rule of rules(); track rule.id) {
-          <mat-chip-option [value]="rule.id">
-            {{ rule.name }}
-          </mat-chip-option>
+    <div class="w-full">
+      <mat-label>Rules</mat-label>
+      <mat-chip-listbox formControlName="rule_ids" multiple>
+        @if (rules()) {
+          @for (rule of rules(); track rule.id) {
+            <mat-chip-option [value]="rule.id">
+              {{ rule.name }}
+            </mat-chip-option>
+          }
         }
-      }
-    </mat-chip-listbox>
+      </mat-chip-listbox>
+    </div>
+
     <div class="flex justify-end">
       <button type="submit" mat-flat-button>Create</button>
     </div>
