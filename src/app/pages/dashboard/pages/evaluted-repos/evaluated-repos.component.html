@@ -19,7 +19,7 @@
               <li>Rule Group Name: </li>
             </ul>
             @if (!evaluation.branch) {
-              <button class="w-full" mat-stroked-button>Evaluate Repository</button>
+              <a [routerLink]="['/admin/register-repositories/' + evaluation.id]" class="w-full" mat-stroked-button>Evaluate Repository</a>
             } @else {
               <button class="w-full" mat-flat-button>Evaluation Details</button>
             }

@@ -21,6 +21,10 @@ export const dashboardRoutes: Routes = [
         component: RegisterReposComponent,
       },
       {
+        path: 'register-repositories/:projectId',
+        component: RegisterReposComponent,
+      },
+      {
         path: 'evaluated-repositories',
         component: EvaluatedReposComponent,
       },

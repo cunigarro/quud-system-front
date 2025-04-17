@@ -21,4 +21,11 @@ export class ProjectsService {
         map((res: any) => res.data)
       );
   }
+
+  project(projectId: number): Observable<Project> {
+    return this.http.get<Project[]>(`${this.baseUrl}/${projectId}`)
+      .pipe(
+        map((res: any) => res.data)
+      );
+  }
 }

@@ -3,9 +3,11 @@ import {
   HttpInterceptor,
   HttpRequest,
   HttpHandler,
-  HttpEvent
+  HttpEvent,
+  HttpErrorResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Injectable()
@@ -16,18 +18,28 @@ export class AuthInterceptor implements HttpInterceptor {
     const currentUrl = this.router.url;
     const isDashboard = currentUrl.startsWith('/admin');
 
+    let request = req;
+
     if (isDashboard) {
       const token = localStorage.getItem('token');
       if (token) {
-        const cloned = req.clone({
+        request = req.clone({
           setHeaders: {
             Authorization: `Bearer ${token}`
           }
         });
-        return next.handle(cloned);
       }
     }
 
-    return next.handle(req);
+    return next.handle(request).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 401 || error.status === 403) {
+          localStorage.removeItem('token');
+          this.router.navigate(['/login']);
+        }
+
+        return throwError(() => error);
+      })
+    );
   }
 }

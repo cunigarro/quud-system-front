@@ -25,4 +25,19 @@ export class ProjectsFacade {
 
     return of(this._projects()!);
   }
+
+  project(projectId: number): Observable<Project> {
+    const project = this._projects()?.find(project => project.id === projectId)
+    if(!project) {
+      return this.projectsService.project(projectId)
+        .pipe(
+          tap((data) => {
+            const current = this._projects() ?? [];
+            this._projects.set([...current, data]);
+          })
+        )
+    }
+
+    return of(project);
+  }
 }

@@ -4,11 +4,16 @@ import { MatCardModule } from '@angular/material/card';
 import { EvaluationsFacade } from '../../../../shared/facades/evaluations.facade';
 import { Evaluation } from '../../../../shared/models/evaluation.model';
 import { JsonPipe } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   templateUrl: './evaluated-repos.component.html',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, JsonPipe],
+  imports: [
+    MatCardModule,
+    MatButtonModule,
+    RouterModule
+  ],
 })
 export class EvaluatedReposComponent implements OnInit {
   evaluations!: Signal<Evaluation[] | null>;

@@ -9,15 +9,15 @@
         <div class="grid grid-cols-2 gap-4">
           <mat-form-field>
             <mat-label>Project Name</mat-label>
-            <input matInput formControlName="name" required>
+            <input matInput formControlName="name">
           </mat-form-field>
           <mat-form-field>
             <mat-label>URL Repository</mat-label>
-            <input matInput formControlName="url" required>
+            <input matInput formControlName="url">
           </mat-form-field>
           <mat-form-field>
             <mat-label>Language</mat-label>
-            <mat-select formControlName="language_id" required>
+            <mat-select formControlName="language_id">
               @if (languages()) {
                 @for (lang of languages(); track lang.id) {
                   <mat-option [value]="lang.id">
@@ -29,7 +29,7 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>Language Version</mat-label>
-            <mat-select formControlName="language_version_id" required>
+            <mat-select formControlName="language_version_id">
               @if (selectedLanguageVersions()) {
                 @for (version of selectedLanguageVersions(); track version.id) {
                   <mat-option [value]="version.id">{{ version.version }}</mat-option>
