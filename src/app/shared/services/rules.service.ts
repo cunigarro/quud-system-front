@@ -17,7 +17,7 @@ export class RulesService {
   rulesGroups(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/groups`)
       .pipe(
-        map((res: any) => res.data)
+        map((res: any) => res.data.groups)
       );
   }
 

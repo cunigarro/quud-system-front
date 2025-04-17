@@ -11,12 +11,12 @@ import { JsonPipe } from '@angular/common';
 })
 export class RulesGroupsComponent implements OnInit {
   rulesFacade = inject(RulesFacade);
-  rules!: Signal<any[] | null>;
+  rulesGroups!: Signal<any[] | null>;
 
   constructor() {}
 
   ngOnInit(): void {
-    this.rulesFacade.loadRules();
-    this.rules = this.rulesFacade.rules;
+    this.rulesFacade.loadRulesGroups();
+    this.rulesGroups = this.rulesFacade.rulesGroups;
   }
 }
