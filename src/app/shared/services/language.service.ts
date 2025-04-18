@@ -1,8 +1,8 @@
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LanguageResponse } from '../models/language.model';
-import { Observable } from 'rxjs';
+import { Language, LanguageResponse } from '../models/language.model';
+import { map, Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class LanguageService {
@@ -10,7 +10,10 @@ export class LanguageService {
 
   constructor(private http: HttpClient) {}
 
-  language(): Observable<LanguageResponse> {
-    return this.http.get<LanguageResponse>(`${this.baseUrl}/languages/`);
+  language(): Observable<Language[]> {
+    return this.http.get<LanguageResponse>(`${this.baseUrl}/languages/`)
+      .pipe(
+        map(res => res.data)
+      );
   }
 }

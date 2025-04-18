@@ -4,8 +4,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonModule } from '@angular/material/button';
 import { RulesFacade } from '../../../../shared/facades/rules.facade';
-import { JsonPipe } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Rule } from '../../../../shared/models/rule.model';
 
 @Component({
   templateUrl: './create-rules-group.component.html',
@@ -27,7 +27,7 @@ export class CreateRulesGroupComponent implements OnInit {
     rule_ids: [[]]
   });
   rulesFacade = inject(RulesFacade);
-  rules!: Signal<any[] | null>;
+  rules!: Signal<Rule[] | null>;
 
   selectedRules: string[] = [];
 

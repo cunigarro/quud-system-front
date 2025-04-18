@@ -3,6 +3,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { RulesFacade } from '../../../../shared/facades/rules.facade';
 import { JsonPipe } from '@angular/common';
+import { RulesGroup } from '../../../../shared/models/rule.model';
 
 @Component({
   templateUrl: './rules-groups.component.html',
@@ -11,7 +12,7 @@ import { JsonPipe } from '@angular/common';
 })
 export class RulesGroupsComponent implements OnInit {
   rulesFacade = inject(RulesFacade);
-  rulesGroups!: Signal<any[] | null>;
+  rulesGroups!: Signal<RulesGroup[] | null>;
 
   constructor() {}
 

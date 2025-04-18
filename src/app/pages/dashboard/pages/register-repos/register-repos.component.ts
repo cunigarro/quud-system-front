@@ -20,7 +20,8 @@ import { ActivatedRoute } from '@angular/router';
 import { RulesFacade } from '../../../../shared/facades/rules.facade';
 import { InspectionsFacade } from '../../../../shared/facades/inspections.facade';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
-import { CreateInspectionDto } from '../../../../shared/models/inspection.model';
+import { CreateInspection } from '../../../../shared/models/inspection.model';
+import { RulesGroup } from '../../../../shared/models/rule.model';
 
 @Component({
   templateUrl: './register-repos.component.html',
@@ -49,7 +50,7 @@ export class RegisterReposComponent implements OnInit {
 
   isLinear = false;
   languages!: Signal<Language[] | null>;
-  rulesGroups!: Signal<any[] | null>;
+  rulesGroups!: Signal<RulesGroup[] | null>;
   selectedLanguageVersions = signal<LanguageVersion[] | null>(null);
 
   firstFormGroup = this._formBuilder.group({
@@ -142,7 +143,7 @@ export class RegisterReposComponent implements OnInit {
 
     const formValue = this.secondFormGroup.value;
 
-    const body: CreateInspectionDto = {
+    const body: CreateInspection = {
       branch: formValue.branch!,
       project_id: Number(this.projectId!),
       rule_group_id: Number(formValue.rule_group_id!),

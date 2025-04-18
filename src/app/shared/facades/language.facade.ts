@@ -14,7 +14,7 @@ export class LanguageFacade {
     if (!this._languages()) {
       this.languageService.language().subscribe({
         next: (langs) => {
-          const data = langs.data.map((l,i) => {
+          const data = langs.map((l,i) => {
             return {
               ...l,
               id: i + 1

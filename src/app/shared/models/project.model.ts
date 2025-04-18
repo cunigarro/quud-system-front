@@ -1,6 +1,6 @@
 export interface CreateProjectResponse {
   message: string;
-  data: Project
+  data: Project;
 }
 
 interface ProjectBase {

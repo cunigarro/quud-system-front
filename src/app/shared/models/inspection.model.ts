@@ -1,4 +1,17 @@
-export interface InspectionResponse {
+export interface CreateInspectionResponse {
+  message: string;
+  errors: string;
+  data: {
+    inspection: Inspection
+  }
+}
+
+export interface InspectionsResponse {
+  message: string;
+  errors: string;
+  data: {
+    inspections: Inspection[]
+  }
 }
 
 export interface Inspection {
@@ -8,7 +21,7 @@ export interface Inspection {
   rule_group_id: number;
 }
 
-export interface CreateInspectionDto {
+export interface CreateInspection {
   branch: string;
   project_id: number;
   rule_group_id: number;

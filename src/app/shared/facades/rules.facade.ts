@@ -1,16 +1,16 @@
-import { CreateProject, CreateProjectResponse, Project } from '../models/project.model';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { RulesService } from '../services/rules.service';
-import { Observable, of, tap } from 'rxjs';
+import { Observable } from 'rxjs';
+import { Rule, RulesGroup } from '../models/rule.model';
 
 @Injectable({ providedIn: 'root' })
 export class RulesFacade {
   private rulesService = inject(RulesService);
 
-  private _rules = signal<Project[] | null>(null);
+  private _rules = signal<Rule[] | null>(null);
   readonly rules = computed(() => this._rules());
 
-  private _rulesGroups = signal<Project[] | null>(null);
+  private _rulesGroups = signal<RulesGroup[] | null>(null);
   readonly rulesGroups = computed(() => this._rulesGroups());
 
   createRulesGroup(data: any): Observable<any> {
