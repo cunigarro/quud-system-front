@@ -11,7 +11,7 @@
               {{ evaluation.name }}
             </p>
             <ul class="list-disc text-sm pl-5 mb-3">
-              <li>Language: </li>
+              <li>Language: {{ languageName(evaluation.language_id) }}</li>
               <li>Url Repo: {{ evaluation.url }}</li>
               <li>Branch Name: {{ evaluation.branch }}</li>
               <li>Create Project Date: {{ evaluation.created_at }}</li>

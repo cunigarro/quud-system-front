@@ -2,8 +2,8 @@
   <h1 class="mb-5 font-bold text-xl">
     Register New Repository
   </h1>
-  <mat-stepper [linear]="true" #stepper>
-    <mat-step [stepControl]="firstFormGroup">
+  <mat-stepper [linear]="true" (selectionChange)="onStepChange($event)" #stepper>
+    <mat-step [stepControl]="firstFormGroup" [editable]="!projectId">
       <form [formGroup]="firstFormGroup" (submit)="registerProject()">
         <ng-template matStepLabel>Register Project</ng-template>
         <div class="grid grid-cols-2 gap-4">

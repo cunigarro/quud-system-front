@@ -10,7 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { AsyncPipe, CommonModule, JsonPipe } from '@angular/common';
+import { AsyncPipe, CommonModule, JsonPipe, Location } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { LanguageFacade } from '../../../../shared/facades/language.facade';
 import { Language, LanguageVersion } from '../../../../shared/models/language.model';
@@ -18,9 +18,9 @@ import { ProjectsFacade } from '../../../../shared/facades/projects.facade';
 import { CreateProjectDto, Project } from '../../../../shared/models/project.model';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { RulesService } from '../../../../shared/services/rules.service';
 import { RulesFacade } from '../../../../shared/facades/rules.facade';
 import { InspectionsFacade } from '../../../../shared/facades/inspections.facade';
+import { StepperSelectionEvent } from '@angular/cdk/stepper';
 
 @Component({
   templateUrl: './register-repos.component.html',
@@ -43,9 +43,9 @@ import { InspectionsFacade } from '../../../../shared/facades/inspections.facade
 export class RegisterReposComponent implements OnInit {
   private _formBuilder = inject(FormBuilder);
   private _route = inject(ActivatedRoute);
-
   private _rulesFacade = inject(RulesFacade);
   private _inspectionsFacade = inject(InspectionsFacade);
+  private _location = inject(Location);
 
   isLinear = false;
   languages!: Signal<Language[] | null>;
@@ -65,7 +65,6 @@ export class RegisterReposComponent implements OnInit {
   });
 
   projectId!: string | null;
-  project$!: Observable<Project | null>;
 
   @ViewChild('stepper') stepper!: MatStepper;
 
@@ -96,21 +95,20 @@ export class RegisterReposComponent implements OnInit {
 
     this.projectId = this._route.snapshot.paramMap.get('projectId');
 
-    this.project$ = this.projectsFacade.project(Number(this.projectId));
-
-    this.projectsFacade.project(Number(this.projectId)).subscribe(project => {
-      this.firstFormGroup.get('language_version_id')?.enable();
-      setTimeout(() => {
-        this.firstFormGroup.setValue({
-          name: project.name,
-          url: project.url,
-          language_id: project.language_id,
-          language_version_id: project.language_version_id
+    if(this.projectId) {
+      this.projectsFacade.project(Number(this.projectId)).subscribe(project => {
+        this.firstFormGroup.get('language_version_id')?.enable();
+        setTimeout(() => {
+          this.firstFormGroup.setValue({
+            name: project.name,
+            url: project.url,
+            language_id: project.language_id,
+            language_version_id: project.language_version_id
+          });
+          this.stepper.selectedIndex = 1;
         });
-
-        this.stepper.next();
       });
-    });
+    }
   }
 
   registerProject() {
@@ -131,7 +129,8 @@ export class RegisterReposComponent implements OnInit {
     this.projectsFacade.createProject(dto)
       .subscribe((res: any) => {
         this.projectId = res.data.id;
-        console.log('Project created', res);
+        const currentPath = this._location.path();
+        this._location.replaceState(`${currentPath}/${this.projectId}`);
       });
   }
 
@@ -156,5 +155,13 @@ export class RegisterReposComponent implements OnInit {
       .subscribe(() => {
         console.log('Inspection created');
       });
+  }
+
+  onStepChange(event: StepperSelectionEvent) {
+    const previousIndex = event.previouslySelectedIndex;
+    const prevStep = this.stepper.steps.get(previousIndex);
+    if (prevStep) {
+      prevStep.editable = false;
+    }
   }
 }
