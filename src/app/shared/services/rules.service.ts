@@ -2,7 +2,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { CreateProjectDto, CreateProjectResponse, Project } from '../models/project.model';
+import { CreateProject, CreateProjectResponse, Project } from '../models/project.model';
 
 @Injectable({ providedIn: 'root' })
 export class RulesService {
@@ -10,7 +10,7 @@ export class RulesService {
 
   constructor(private http: HttpClient) {}
 
-  createRulesGroup(data: CreateProjectDto): Observable<any> {
+  createRulesGroup(data: CreateProject): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/groups`, data);
   }
 

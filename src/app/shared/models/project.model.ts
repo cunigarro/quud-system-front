@@ -16,6 +16,6 @@ export interface Project extends ProjectBase {
   language_id: number;
 }
 
-export interface CreateProjectDto extends ProjectBase {
+export interface CreateProject extends ProjectBase {
   language_id: number;
 }

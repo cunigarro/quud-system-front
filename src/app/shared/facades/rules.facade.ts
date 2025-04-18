@@ -1,4 +1,4 @@
-import { CreateProjectDto, CreateProjectResponse, Project } from '../models/project.model';
+import { CreateProject, CreateProjectResponse, Project } from '../models/project.model';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { RulesService } from '../services/rules.service';
 import { Observable, of, tap } from 'rxjs';

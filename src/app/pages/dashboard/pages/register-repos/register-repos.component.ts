@@ -15,12 +15,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { LanguageFacade } from '../../../../shared/facades/language.facade';
 import { Language, LanguageVersion } from '../../../../shared/models/language.model';
 import { ProjectsFacade } from '../../../../shared/facades/projects.facade';
-import { CreateProjectDto, Project } from '../../../../shared/models/project.model';
+import { CreateProject } from '../../../../shared/models/project.model';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
 import { RulesFacade } from '../../../../shared/facades/rules.facade';
 import { InspectionsFacade } from '../../../../shared/facades/inspections.facade';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
+import { CreateInspectionDto } from '../../../../shared/models/inspection.model';
 
 @Component({
   templateUrl: './register-repos.component.html',
@@ -119,14 +119,14 @@ export class RegisterReposComponent implements OnInit {
 
     const formValue = this.firstFormGroup.value;
 
-    const dto: CreateProjectDto = {
+    const body: CreateProject = {
       name: formValue.name!,
       url: formValue.url!,
       language_id: formValue.language_id!,
       language_version_id: formValue.language_version_id!,
     };
 
-    this.projectsFacade.createProject(dto)
+    this.projectsFacade.createProject(body)
       .subscribe((res: any) => {
         this.projectId = res.data.id;
         const currentPath = this._location.path();
@@ -142,16 +142,16 @@ export class RegisterReposComponent implements OnInit {
 
     const formValue = this.secondFormGroup.value;
 
-    const dto = {
-      branch: formValue.branch,
-      project_id: this.projectId,
-      rule_group_id: formValue.rule_group_id,
+    const body: CreateInspectionDto = {
+      branch: formValue.branch!,
+      project_id: Number(this.projectId!),
+      rule_group_id: Number(formValue.rule_group_id!),
       notification_info: {
         firebase_token: ''
       }
     }
 
-    this._inspectionsFacade.createInspection(dto)
+    this._inspectionsFacade.createInspection(body)
       .subscribe(() => {
         console.log('Inspection created');
       });

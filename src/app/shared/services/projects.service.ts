@@ -3,7 +3,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { CreateProjectDto, CreateProjectResponse, Project } from '../models/project.model';
+import { CreateProject, CreateProjectResponse, Project } from '../models/project.model';
 
 @Injectable({ providedIn: 'root' })
 export class ProjectsService {
@@ -11,7 +11,7 @@ export class ProjectsService {
 
   constructor(private http: HttpClient) {}
 
-  createProject(data: CreateProjectDto): Observable<CreateProjectResponse> {
+  createProject(data: CreateProject): Observable<CreateProjectResponse> {
     return this.http.post<CreateProjectResponse>(`${this.baseUrl}/`, data);
   }
 
