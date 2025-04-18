@@ -1,7 +1,7 @@
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { map, Observable, of, pipe } from 'rxjs';
 import { Inspection, InspectionResponse } from '../models/inspection.model';
 
 @Injectable({ providedIn: 'root' })
@@ -15,14 +15,9 @@ export class ProjectsService {
   }
 
   inspections(): Observable<Inspection[]> {
-    // return this.http.get<Inspection[]>(`${this.baseUrl}/`);
-
-    return of([
-      {
-        branch: 'main',
-        project_id: 2,
-        rule_group_id: 1
-      }
-    ]);
+    return this.http.get<any>(`${this.baseUrl}/`)
+      .pipe(
+        map(res => res.data.inspections)
+      );
   }
 }

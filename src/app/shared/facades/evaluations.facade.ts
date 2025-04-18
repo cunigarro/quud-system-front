@@ -20,7 +20,7 @@ export class EvaluationsFacade {
     }).pipe(
       map(({ projects, inspections }) => {
         const evaluations: Evaluation[] = projects.map(project => {
-          const inspection = inspections.find(i => i.project_id === project.id);
+          const inspection = inspections.find(i => i.id === project.id);
 
           const evaluation: Evaluation = {
             ...project,

@@ -100,18 +100,13 @@ export class RegisterReposComponent implements OnInit {
     this.projectsFacade.project(Number(projectId)).subscribe(project => {
       this.firstFormGroup.get('language_version_id')?.enable();
       setTimeout(() => {
-        this.firstFormGroup.patchValue({
+        this.firstFormGroup.setValue({
           name: project.name,
           url: project.url,
-          language_id: project.language_id
+          language_id: project.language_id,
+          language_version_id: project.language_version_id
         });
-
-        setTimeout(() => {
-          this.firstFormGroup.patchValue({
-            language_version_id: project.language_version_id
-          });
-        }, 1000);
-      }, 2000);
+      });
     });
   }
 
