@@ -2,7 +2,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, of, pipe } from 'rxjs';
-import { Inspection, CreateInspectionResponse, InspectionsResponse } from '../models/inspection.model';
+import { Inspection, CreateInspectionResponse, InspectionsResponse, CreateInspection } from '../models/inspection.model';
 
 @Injectable({ providedIn: 'root' })
 export class ProjectsService {
@@ -10,7 +10,7 @@ export class ProjectsService {
 
   constructor(private http: HttpClient) {}
 
-  createInspection(data: any): Observable<Inspection> {
+  createInspection(data: CreateInspection): Observable<Inspection> {
     return this.http.post<CreateInspectionResponse>(`${this.baseUrl}/`, data)
       .pipe(
         map(res => res.data.inspection)

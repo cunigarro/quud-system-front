@@ -1,7 +1,7 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { ProjectsService } from '../services/inspections.service';
 import { catchError, Observable, of, tap } from 'rxjs';
-import { Inspection } from '../models/inspection.model';
+import { CreateInspection, Inspection } from '../models/inspection.model';
 
 @Injectable({ providedIn: 'root' })
 export class InspectionsFacade {
@@ -11,7 +11,7 @@ export class InspectionsFacade {
 
   readonly inspections = computed(() => this._inspections());
 
-  createInspection(data: any): Observable<any> {
+  createInspection(data: CreateInspection): Observable<Inspection> {
     return this.inspectionsService.createInspection(data);
   }
 
