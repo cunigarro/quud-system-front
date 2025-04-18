@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal, Signal } from '@angular/core';
+import { Component, inject, OnInit, signal, Signal, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   Validators,
@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatStepperModule } from '@angular/material/stepper';
+import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { AsyncPipe, CommonModule, JsonPipe } from '@angular/common';
@@ -67,6 +67,8 @@ export class RegisterReposComponent implements OnInit {
   projectId!: string | null;
   project$!: Observable<Project | null>;
 
+  @ViewChild('stepper') stepper!: MatStepper;
+
   constructor(
     private languageFacade: LanguageFacade,
     private projectsFacade: ProjectsFacade
@@ -105,6 +107,8 @@ export class RegisterReposComponent implements OnInit {
           language_id: project.language_id,
           language_version_id: project.language_version_id
         });
+
+        this.stepper.next();
       });
     });
   }
