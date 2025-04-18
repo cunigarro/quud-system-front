@@ -13,6 +13,7 @@ export interface Project extends ProjectBase {
   id: number;
   created_at: Date;
   updated_at: Date;
+  language_id: number;
 }
 
 export interface CreateProjectDto extends ProjectBase {

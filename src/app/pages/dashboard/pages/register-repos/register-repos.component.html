@@ -45,17 +45,20 @@
     </mat-step>
     <mat-step [stepControl]="secondFormGroup">
       <ng-template matStepLabel>Evaluate Code</ng-template>
-      <form [formGroup]="secondFormGroup">
+      <form [formGroup]="secondFormGroup" (submit)="inspectProject()">
         <div class="grid grid-cols-2 gap-4">
           <mat-form-field>
             <mat-label>Branch</mat-label>
-            <input matInput formControlName="branch" required>
+            <input formControlName="branch" matInput>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Quality Rules Group</mat-label>
-            <mat-select formControlName="qualityRulesGroup" required>
-              <mat-option value="programacionIntermedia">Curso de programación intermedia</mat-option>
-              <mat-option value="programacionAvanzada">Curso de programación avanzada</mat-option>
+            <mat-select formControlName="rule_group_id">
+              @if(rulesGroups()) {
+                @for (rulesGroup of rulesGroups(); track rulesGroup.id) {
+                  <mat-option [value]="rulesGroup.id">{{ rulesGroup.name }}</mat-option>
+                }
+              }
             </mat-select>
           </mat-form-field>
         </div>
