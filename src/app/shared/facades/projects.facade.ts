@@ -30,12 +30,6 @@ export class ProjectsFacade {
     const project = this._projects()?.find(project => project.id === projectId)
     if(!project) {
       return this.projectsService.project(projectId)
-        .pipe(
-          tap((data) => {
-            const current = this._projects() ?? [];
-            this._projects.set([...current, data]);
-          })
-        )
     }
 
     return of(project);

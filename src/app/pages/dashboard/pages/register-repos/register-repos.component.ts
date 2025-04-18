@@ -64,6 +64,7 @@ export class RegisterReposComponent implements OnInit {
     rule_group_id: ['', Validators.required],
   });
 
+  projectId!: string | null;
   project$!: Observable<Project | null>;
 
   constructor(
@@ -91,13 +92,11 @@ export class RegisterReposComponent implements OnInit {
       this.firstFormGroup.get('language_version_id')?.reset();
     });
 
-    const projectId = this._route.snapshot.paramMap.get('projectId');
+    this.projectId = this._route.snapshot.paramMap.get('projectId');
 
-    console.log(this.projectsFacade.project(Number(projectId)));
+    this.project$ = this.projectsFacade.project(Number(this.projectId));
 
-    this.project$ = this.projectsFacade.project(Number(projectId));
-
-    this.projectsFacade.project(Number(projectId)).subscribe(project => {
+    this.projectsFacade.project(Number(this.projectId)).subscribe(project => {
       this.firstFormGroup.get('language_version_id')?.enable();
       setTimeout(() => {
         this.firstFormGroup.setValue({
@@ -126,8 +125,9 @@ export class RegisterReposComponent implements OnInit {
     };
 
     this.projectsFacade.createProject(dto)
-      .subscribe(() => {
-        console.log('Project created');
+      .subscribe((res: any) => {
+        this.projectId = res.data.id;
+        console.log('Project created', res);
       });
   }
 
@@ -141,7 +141,7 @@ export class RegisterReposComponent implements OnInit {
 
     const dto = {
       branch: formValue.branch,
-      project_id: 3,
+      project_id: this.projectId,
       rule_group_id: formValue.rule_group_id,
       notification_info: {
         firebase_token: ''
