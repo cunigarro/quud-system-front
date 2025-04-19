@@ -1,5 +1,9 @@
 import { ApiResponse } from "./api.model";
 
+export type CreateInspectionResponse = ApiResponse<{ inspection: Inspection }>;
+
+export type InspectionsResponse = ApiResponse<{ inspections: Inspection[] }>;
+
 export interface Inspection {
   id: number;
   branch: string;
@@ -15,6 +19,3 @@ export interface CreateInspectionBody {
 export interface NotifyInspection {
   firebase_token: string;
 }
-
-export type CreateInspectionResponse = ApiResponse<{ inspection: Inspection }>;
-export type InspectionsResponse = ApiResponse<{ inspections: Inspection[] }>;
