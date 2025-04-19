@@ -16,6 +16,7 @@ export interface RulesGroup {
   id: number;
   name: string;
   description: string;
+  group_rules: Rule[];
 }
 
 export interface Rule {

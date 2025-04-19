@@ -32,7 +32,14 @@ export class RulesFacade {
     if(!this._rulesGroups()) {
       this.rulesService.rulesGroups().subscribe({
         next: (rulesGroups) => {
-          this._rulesGroups.set(rulesGroups)
+          const groups = rulesGroups.map(rulesGroup => ({
+            ...rulesGroup,
+            group_rules: rulesGroup.group_rules.map(rule => ({
+              id: rule.id,
+              name: (rule as any).rule.name // TODO: Fix rules groups model
+            }))
+          }))
+          this._rulesGroups.set(groups);
         },
         error: (err) => console.error('Error loading rules groups', err),
       })

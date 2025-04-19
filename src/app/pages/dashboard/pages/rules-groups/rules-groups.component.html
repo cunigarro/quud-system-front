@@ -14,11 +14,11 @@
               {{ rulesGroup.description }}
             </p>
             <ul class="list-disc text-sm pl-5 mb-3">
-              <li>Maintainability</li>
-              <li>Scalability</li>
-              <li>Inheritance</li>
-              <li>Encapsulation</li>
-              <li>Reliability</li>
+              @for(rule of rulesGroup.group_rules; track rule.id) {
+                <li>
+                  {{ rule.name }}
+                </li>
+              }
             </ul>
           </mat-card-content>
         </mat-card>
