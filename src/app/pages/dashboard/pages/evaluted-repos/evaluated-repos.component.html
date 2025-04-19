@@ -13,12 +13,13 @@
             <ul class="list-disc text-sm pl-5 mb-3">
               <li>Language: {{ languageName(evaluation.language_id) }}</li>
               <li>Url Repo: {{ evaluation.url }}</li>
-              <li>Branch Name: {{ evaluation.branch }}</li>
               <li>Create Project Date: {{ evaluation.created_at }}</li>
               <li>Update Project Date: {{ evaluation.updated_at }}</li>
-              <li>Rule Group Name: </li>
+              @if(evaluation?.rule_group?.name) {
+                <li>Rule Group Name: {{ evaluation.rule_group.name }}</li>
+              }
             </ul>
-            @if (!evaluation.branch) {
+            @if (!evaluation.project) {
               <a [routerLink]="['/admin/register-repositories/' + evaluation.id]" class="w-full" mat-stroked-button>Evaluate Repository</a>
             } @else {
               <button class="w-full" mat-flat-button>Evaluation Details</button>

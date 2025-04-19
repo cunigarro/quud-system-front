@@ -20,13 +20,13 @@ export class EvaluationsFacade {
     }).pipe(
       map(({ projects, inspections }) => {
         const evaluations: Evaluation[] = projects.map(project => {
-          const inspection = inspections.find(i => i.id === project.id);
+          const inspection = inspections.find(i => i.project.id === project.id);
 
           const evaluation: Evaluation = {
             ...project,
             branch: inspection?.branch ?? '',
-            project_id: inspection?.project_id ?? project.id,
-            rule_group_id: inspection?.rule_group_id ?? 0
+            project: inspection?.project!,
+            rule_group: inspection?.rule_group!
           };
 
           return evaluation;
