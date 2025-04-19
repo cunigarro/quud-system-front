@@ -1,16 +1,16 @@
 <div class="min-h-screen flex flex-col">
-  <dashboard-header
-    [simpleHeader]="true"
-  ></dashboard-header>
-  <div class="flex flex-col flex grow items-center justify-center min-h-screen bg-gray-100 text-gray-800">
+  <dashboard-header [simpleHeader]="true"></dashboard-header>
+
+  <div class="flex flex-col flex-grow items-center justify-center bg-gray-100 text-gray-800">
     <h1 class="text-6xl font-extrabold text-red-600 mb-4">404</h1>
-    <h2 class="text-2xl font-semibold mb-2">Página no encontrada</h2>
+    <h2 class="text-2xl font-semibold mb-2">Page Not Found</h2>
     <p class="text-center text-lg mb-6 max-w-md">
-      La página que estás buscando no existe o ha sido movida. Verifica la dirección o vuelve al inicio.
+      The page you're looking for doesn't exist or has been moved. Please check the URL or go back to the homepage.
     </p>
     <button mat-flat-button routerLink="/">
-      Volver al inicio
+      Go to Homepage
     </button>
   </div>
+
   <dashboard-footer></dashboard-footer>
 </div>
