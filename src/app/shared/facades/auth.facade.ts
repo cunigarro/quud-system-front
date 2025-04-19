@@ -21,7 +21,7 @@ export class AuthFacade {
   loginUser(credentials: LoginBody): Observable<Login> {
     return this.authService.login(credentials).pipe(
       map((authData: LoginResponse) => ({
-        token: authData.data.token.access_token
+        token: authData.data.access_token
       })),
       tap(data => {
         localStorage.setItem('token', data.token);
