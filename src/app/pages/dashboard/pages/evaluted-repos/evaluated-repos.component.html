@@ -5,25 +5,35 @@
   <div class="grid grid-cols-3 gap-4">
     @if (evaluations()) {
       @for (evaluation of evaluations(); track evaluation.id) {
-        <mat-card appearance="outlined">
-          <mat-card-content>
-            <p class="font-semibold mb-3">
-              {{ evaluation.name }}
-            </p>
-            <ul class="list-disc text-sm pl-5 mb-3">
-              <li>Language: {{ languageName(evaluation.language_id) }}</li>
-              <li>Url Repo: {{ evaluation.url }}</li>
-              <li>Create Project Date: {{ evaluation.created_at }}</li>
-              <li>Update Project Date: {{ evaluation.updated_at }}</li>
-              @if(evaluation?.rule_group?.name) {
-                <li>Rule Group Name: {{ evaluation.rule_group.name }}</li>
-              }
-            </ul>
-            @if (!evaluation.project) {
-              <a [routerLink]="['/admin/register-repositories/' + evaluation.id]" class="w-full" mat-stroked-button>Evaluate Repository</a>
-            } @else {
-              <button class="w-full" mat-flat-button>Evaluation Details</button>
-            }
+        <mat-card appearance="outlined" class="flex flex-col h-full">
+          <mat-card-content class="flex-grow">
+            <div class="flex flex-col h-full">
+              <p class="font-semibold mb-3">
+                {{ evaluation.name }}
+              </p>
+
+              <ul class="list-disc text-sm pl-5 mb-3 flex-grow">
+                <li>Language: {{ languageName(evaluation.language_id) }}</li>
+                <li>Url Repo: {{ evaluation.url }}</li>
+                <li>Create Project Date: {{ evaluation.created_at }}</li>
+                <li>Update Project Date: {{ evaluation.updated_at }}</li>
+                @if(evaluation?.rule_group?.name) {
+                  <li>Rule Group Name: {{ evaluation.rule_group.name }}</li>
+                }
+              </ul>
+
+              <div class="mt-auto">
+                @if (!evaluation.project) {
+                  <a [routerLink]="['/admin/register-repositories/' + evaluation.id]" class="w-full" mat-stroked-button>
+                    Evaluate Repository
+                  </a>
+                } @else {
+                  <button class="w-full" mat-flat-button>
+                    Evaluation Details
+                  </button>
+                }
+              </div>
+            </div>
           </mat-card-content>
         </mat-card>
       }
