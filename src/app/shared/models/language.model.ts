@@ -1,8 +1,6 @@
-export interface LanguageResponse {
-  message: string;
-  data: Language[];
-  errors: any;
-}
+import { ApiResponse } from "./api.model";
+
+export type LanguageResponse = ApiResponse<{ languages: Language[] }>;
 
 export interface Language {
   name: string;

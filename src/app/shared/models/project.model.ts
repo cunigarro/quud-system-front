@@ -1,8 +1,10 @@
-export interface CreateProjectResponse {
-  message: string;
-  data: Project;
-  errors: string;
-}
+import { ApiResponse } from "./api.model";
+
+export type CreateProjectResponse = ApiResponse<{ project: Project }>;
+
+export type ProjectResponse = ApiResponse<{ project: Project }>;
+
+export type ProjectsResponse = ApiResponse<{ projects: Project[] }>;
 
 interface ProjectBase {
   name: string;
@@ -17,4 +19,4 @@ export interface Project extends ProjectBase {
   updated_at: Date;
 }
 
-export interface CreateProject extends ProjectBase {}
+export interface CreateProjectBody extends ProjectBase {}

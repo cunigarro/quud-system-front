@@ -1,7 +1,7 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { ProjectsService } from '../services/projects.service';
-import { catchError, finalize, map, Observable, of, tap } from 'rxjs';
-import { CreateProject, CreateProjectResponse, Project } from '../models/project.model';
+import { Observable, of, tap } from 'rxjs';
+import { CreateProjectBody, Project } from '../models/project.model';
 
 @Injectable({ providedIn: 'root' })
 export class ProjectsFacade {
@@ -11,7 +11,7 @@ export class ProjectsFacade {
 
   readonly projects = computed(() => this._projects());
 
-  createProject(data: CreateProject): Observable<CreateProjectResponse> {
+  createProject(data: CreateProjectBody): Observable<Project> {
     return this.projectsService.createProject(data);
   }
 

@@ -15,7 +15,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { LanguageFacade } from '../../../../shared/facades/language.facade';
 import { Language, LanguageVersion } from '../../../../shared/models/language.model';
 import { ProjectsFacade } from '../../../../shared/facades/projects.facade';
-import { CreateProject } from '../../../../shared/models/project.model';
+import { CreateProjectBody } from '../../../../shared/models/project.model';
 import { ActivatedRoute } from '@angular/router';
 import { RulesFacade } from '../../../../shared/facades/rules.facade';
 import { InspectionsFacade } from '../../../../shared/facades/inspections.facade';
@@ -120,7 +120,7 @@ export class RegisterReposComponent implements OnInit {
 
     const formValue = this.firstFormGroup.value;
 
-    const body: CreateProject = {
+    const body: CreateProjectBody = {
       name: formValue.name!,
       url: formValue.url!,
       language_id: formValue.language_id!,

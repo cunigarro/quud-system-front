@@ -13,7 +13,7 @@ export class LanguageService {
   language(): Observable<Language[]> {
     return this.http.get<LanguageResponse>(`${this.baseUrl}/languages/`)
       .pipe(
-        map(res => res.data)
+        map(res => res.data.languages)
       );
   }
 }
