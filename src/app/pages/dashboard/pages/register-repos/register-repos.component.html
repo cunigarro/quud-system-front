@@ -26,7 +26,7 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>Language</mat-label>
-            <mat-select formControlName="language_id">
+            <mat-select formControlName="language_id" [errorStateMatcher]="matcher">
               <mat-option [value]="null" disabled>Select a language</mat-option>
               @if (languages()) {
                 @for (lang of languages(); track lang.id) {
@@ -42,7 +42,7 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>Language Version</mat-label>
-            <mat-select formControlName="language_version_id">
+            <mat-select formControlName="language_version_id" [errorStateMatcher]="matcher">
               <mat-option [value]="null" disabled>Select a language version</mat-option>
               @if (selectedLanguageVersions()) {
                 @for (version of selectedLanguageVersions(); track version.id) {
@@ -66,17 +66,24 @@
         <div class="grid grid-cols-2 gap-4 mb-8">
           <mat-form-field>
             <mat-label>Branch</mat-label>
-            <input formControlName="branch" matInput>
+            <input formControlName="branch" matInput [errorStateMatcher]="matcher">
+            @if (secondFormGroup.get('branch')?.hasError('required')) {
+              <mat-error>Branch name is <strong>required</strong></mat-error>
+            }
           </mat-form-field>
           <mat-form-field>
             <mat-label>Quality Rules Group</mat-label>
-            <mat-select formControlName="rule_group_id">
+            <mat-select formControlName="rule_group_id" [errorStateMatcher]="matcher">
+              <mat-option [value]="null" disabled>Select a rules group</mat-option>
               @if(rulesGroups()) {
                 @for (rulesGroup of rulesGroups(); track rulesGroup.id) {
                   <mat-option [value]="rulesGroup.id">{{ rulesGroup.name }}</mat-option>
                 }
               }
             </mat-select>
+            @if (secondFormGroup.get('rule_group_id')?.hasError('required')) {
+              <mat-error>Rules group is <strong>required</strong></mat-error>
+            }
           </mat-form-field>
         </div>
         <div>

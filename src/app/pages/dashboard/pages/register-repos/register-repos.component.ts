@@ -63,7 +63,7 @@ export class RegisterReposComponent implements OnInit {
 
   secondFormGroup = this._formBuilder.group({
     branch: ['', Validators.required],
-    rule_group_id: ['', Validators.required],
+    rule_group_id: [null, Validators.required],
   });
 
   projectId!: string | null;
