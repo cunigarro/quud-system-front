@@ -1,10 +1,6 @@
-export interface RuleResponse {
-  message: string;
-  errors: string;
-  data: {
-    rules: Rule[];
-  };
-}
+import { ApiResponse } from "./api.model";
+
+export type RuleResponse = ApiResponse<{ rules: Rule[] }>;
 
 export interface RulesGroupResponse {
   message: string;

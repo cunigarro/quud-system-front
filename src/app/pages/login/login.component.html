@@ -31,9 +31,25 @@
         <mat-label>Password</mat-label>
         <input
           matInput
+          [type]="showPassword ? 'text' : 'password'"
           formControlName="password"
           [errorStateMatcher]="matcher"
+          autocomplete="current-password"
         />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="showPassword = !showPassword"
+          [attr.aria-label]="'Show password'"
+          [attr.aria-pressed]="showPassword"
+        >
+          @if(showPassword) {
+            <icon [path]="mdiEye"></icon>
+          } @else {
+            <icon [path]="mdiEyeOff"></icon>
+          }
+        </button>
         @if (loginForm.get('password')?.hasError('required')) {
           <mat-error>Password is <strong>required</strong></mat-error>
         }

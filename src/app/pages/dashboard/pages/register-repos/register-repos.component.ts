@@ -20,7 +20,7 @@ import { ActivatedRoute } from '@angular/router';
 import { RulesFacade } from '../../../../shared/facades/rules.facade';
 import { InspectionsFacade } from '../../../../shared/facades/inspections.facade';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
-import { CreateInspection } from '../../../../shared/models/inspection.model';
+import { CreateInspectionBody } from '../../../../shared/models/inspection.model';
 import { RulesGroup } from '../../../../shared/models/rule.model';
 
 @Component({
@@ -143,7 +143,7 @@ export class RegisterReposComponent implements OnInit {
 
     const formValue = this.secondFormGroup.value;
 
-    const body: CreateInspection = {
+    const body: CreateInspectionBody = {
       branch: formValue.branch!,
       project_id: Number(this.projectId!),
       rule_group_id: Number(formValue.rule_group_id!),

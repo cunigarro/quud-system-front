@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { SHARED_IMPORTS } from '../../shared/shared.imports';
+import { mdiEye, mdiEyeOff } from '@mdi/js';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -32,6 +33,9 @@ export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   matcher = new MyErrorStateMatcher();
   isLoading = false;
+  showPassword = false;
+  mdiEye = mdiEye;
+  mdiEyeOff = mdiEyeOff;
 
   constructor(
     private router: Router,

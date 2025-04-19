@@ -16,7 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { SHARED_IMPORTS } from '../../shared/shared.imports';
-import { finalize } from 'rxjs';
+import { mdiEye, mdiEyeOff } from '@mdi/js';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
@@ -51,6 +51,9 @@ export class LoginComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
   isLoading = false;
   showAlert = false;
+  showPassword = false;
+  mdiEye = mdiEye;
+  mdiEyeOff = mdiEyeOff;
 
   constructor(
     private router: Router,
@@ -61,7 +64,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
 
