@@ -1,7 +1,7 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { RulesService } from '../services/rules.service';
 import { Observable } from 'rxjs';
-import { Rule, RulesGroup } from '../models/rule.model';
+import { CreateRulesGroupBody, Rule, RulesGroup } from '../models/rule.model';
 
 @Injectable({ providedIn: 'root' })
 export class RulesFacade {
@@ -13,7 +13,7 @@ export class RulesFacade {
   private _rulesGroups = signal<RulesGroup[] | null>(null);
   readonly rulesGroups = computed(() => this._rulesGroups());
 
-  createRulesGroup(data: any): Observable<any> {
+  createRulesGroup(data: CreateRulesGroupBody): Observable<RulesGroup> {
     return this.rulesService.createRulesGroup(data);
   }
 

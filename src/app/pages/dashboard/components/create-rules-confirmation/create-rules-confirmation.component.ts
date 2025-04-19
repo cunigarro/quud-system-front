@@ -1,5 +1,4 @@
-import { Component, inject, model } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
@@ -9,29 +8,26 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { RulesGroup } from '../../../../shared/models/rule.model';
+import { JsonPipe } from '@angular/common';
 
 @Component({
-  templateUrl: './user-profile.component.html',
+  templateUrl: './create-rules-confirmation.component.html',
   standalone: true,
   imports: [
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
     MatButtonModule,
     MatDialogTitle,
     MatDialogContent,
     MatDialogActions,
     MatDialogClose,
+    JsonPipe
   ],
 })
-export class UserProfileComponent {
-  readonly dialogRef = inject(MatDialogRef<UserProfileComponent>);
+export class CreateRulesConfirmation {
+  readonly dialogRef = inject(MatDialogRef<CreateRulesConfirmation>);
   readonly data = inject<RulesGroup>(MAT_DIALOG_DATA);
 
-  closeDialog(): void {
+  onNoClick(): void {
     this.dialogRef.close();
   }
 }

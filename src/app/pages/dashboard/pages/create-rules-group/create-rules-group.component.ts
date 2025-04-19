@@ -1,11 +1,13 @@
-import { Component, inject, OnInit, Signal } from '@angular/core';
+import { Component, inject, model, OnInit, signal, Signal } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonModule } from '@angular/material/button';
 import { RulesFacade } from '../../../../shared/facades/rules.facade';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Rule } from '../../../../shared/models/rule.model';
+import { CreateRulesGroupBody, Rule, RulesGroup } from '../../../../shared/models/rule.model';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { CreateRulesConfirmation } from '../../components/create-rules-confirmation/create-rules-confirmation.component';
 
 @Component({
   templateUrl: './create-rules-group.component.html',
@@ -16,7 +18,8 @@ import { Rule } from '../../../../shared/models/rule.model';
     MatIconModule,
     MatChipsModule,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule
   ],
 })
 export class CreateRulesGroupComponent implements OnInit {
@@ -28,8 +31,8 @@ export class CreateRulesGroupComponent implements OnInit {
   });
   rulesFacade = inject(RulesFacade);
   rules!: Signal<Rule[] | null>;
-
   selectedRules: string[] = [];
+  readonly dialog = inject(MatDialog);
 
   constructor() {}
 
@@ -59,9 +62,25 @@ export class CreateRulesGroupComponent implements OnInit {
 
     const formValue = this.createRulesForm.value;
 
-    this.rulesFacade.createRulesGroup(formValue)
-      .subscribe(() => {
-        console.log('Rules created.');
+    const body: CreateRulesGroupBody = {
+      name: formValue.name!,
+      description: formValue.description!,
+      rule_ids: formValue.rule_ids!
+    };
+
+    this.rulesFacade.createRulesGroup(body)
+      .subscribe(rulesGroup => {
+        this.openDialog(rulesGroup);
       });
+  }
+
+  private openDialog(rulesGroup: RulesGroup): void {
+    const dialogRef = this.dialog.open(CreateRulesConfirmation, {
+      data: rulesGroup
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.createRulesForm.reset();
+    });
   }
 }
