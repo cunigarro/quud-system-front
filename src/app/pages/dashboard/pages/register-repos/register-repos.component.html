@@ -6,7 +6,7 @@
     <mat-step [stepControl]="firstFormGroup" [editable]="!projectId">
       <form [formGroup]="firstFormGroup" (submit)="registerProject()">
         <ng-template matStepLabel>Register Project</ng-template>
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-2 gap-4 mb-8">
           <mat-form-field>
             <mat-label>Project Name</mat-label>
             <input matInput formControlName="name" [errorStateMatcher]="matcher">
@@ -27,6 +27,7 @@
           <mat-form-field>
             <mat-label>Language</mat-label>
             <mat-select formControlName="language_id">
+              <mat-option [value]="null" disabled>Select a language</mat-option>
               @if (languages()) {
                 @for (lang of languages(); track lang.id) {
                   <mat-option [value]="lang.id">
@@ -42,6 +43,7 @@
           <mat-form-field>
             <mat-label>Language Version</mat-label>
             <mat-select formControlName="language_version_id">
+              <mat-option [value]="null" disabled>Select a language version</mat-option>
               @if (selectedLanguageVersions()) {
                 @for (version of selectedLanguageVersions(); track version.id) {
                   <mat-option [value]="version.id">{{ version.version }}</mat-option>
@@ -61,7 +63,7 @@
     <mat-step [stepControl]="secondFormGroup">
       <ng-template matStepLabel>Evaluate Code</ng-template>
       <form [formGroup]="secondFormGroup" (submit)="inspectProject()">
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-2 gap-4 mb-8">
           <mat-form-field>
             <mat-label>Branch</mat-label>
             <input formControlName="branch" matInput>
@@ -78,7 +80,6 @@
           </mat-form-field>
         </div>
         <div>
-          <!-- <button mat-button matStepperPrevious>Back</button> -->
           <button mat-flat-button matStepperNext>Evaluate</button>
         </div>
       </form>

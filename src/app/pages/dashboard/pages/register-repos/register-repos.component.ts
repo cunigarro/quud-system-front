@@ -57,8 +57,8 @@ export class RegisterReposComponent implements OnInit {
   firstFormGroup = this._formBuilder.group({
     name: ['', Validators.required],
     url: ['', [Validators.required, Validators.pattern(/^(https?:\/\/)?([\w\-]+\.)+[\w\-]+(\/[\w\-._~:/?#[\]@!$&'()*+,;=]*)?$/)]],
-    language_id: [0, Validators.required],
-    language_version_id: [{ value: 0, disabled: true }, Validators.required],
+    language_id: [null, Validators.required],
+    language_version_id: [{ value: null, disabled: true }, Validators.required],
   });
 
   secondFormGroup = this._formBuilder.group({
@@ -106,8 +106,8 @@ export class RegisterReposComponent implements OnInit {
           this.firstFormGroup.setValue({
             name: project.name,
             url: project.url,
-            language_id: project.language_id,
-            language_version_id: project.language_version_id
+            language_id: project.language_id as any, // TODO: Don't use any
+            language_version_id: project.language_version_id as any // TODO: Don't use any
           });
           this.stepper.selectedIndex = 1;
         });
