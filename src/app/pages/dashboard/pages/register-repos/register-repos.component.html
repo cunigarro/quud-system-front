@@ -9,11 +9,20 @@
         <div class="grid grid-cols-2 gap-4">
           <mat-form-field>
             <mat-label>Project Name</mat-label>
-            <input matInput formControlName="name">
+            <input matInput formControlName="name" [errorStateMatcher]="matcher">
+            @if (firstFormGroup.get('name')?.hasError('required')) {
+              <mat-error>Project Name is <strong>required</strong></mat-error>
+            }
           </mat-form-field>
           <mat-form-field>
             <mat-label>URL Repository</mat-label>
-            <input matInput formControlName="url">
+            <input matInput formControlName="url" [errorStateMatcher]="matcher" placeholder="https://ejemplo.com">
+            @if (firstFormGroup.get('url')?.hasError('pattern') && !firstFormGroup.get('url')?.hasError('required')) {
+              <mat-error>Must be a valid url</mat-error>
+            }
+            @if (firstFormGroup.get('url')?.hasError('required')) {
+              <mat-error>Url Repository is <strong>required</strong></mat-error>
+            }
           </mat-form-field>
           <mat-form-field>
             <mat-label>Language</mat-label>
@@ -26,6 +35,9 @@
                 }
               }
             </mat-select>
+            @if (firstFormGroup.get('language_id')?.hasError('required')) {
+              <mat-error>Language is <strong>required</strong></mat-error>
+            }
           </mat-form-field>
           <mat-form-field>
             <mat-label>Language Version</mat-label>
@@ -36,6 +48,9 @@
                 }
               }
             </mat-select>
+            @if (firstFormGroup.get('language_version_id')?.hasError('required')) {
+              <mat-error>Language Version is <strong>required</strong></mat-error>
+            }
           </mat-form-field>
         </div>
         <div>

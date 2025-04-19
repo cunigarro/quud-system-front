@@ -22,6 +22,7 @@ import { InspectionsFacade } from '../../../../shared/facades/inspections.facade
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { CreateInspectionBody } from '../../../../shared/models/inspection.model';
 import { RulesGroup } from '../../../../shared/models/rule.model';
+import { FormErrorStateMatcher } from '../../../../shared/utils/form-error-matcher';
 
 @Component({
   templateUrl: './register-repos.component.html',
@@ -55,7 +56,7 @@ export class RegisterReposComponent implements OnInit {
 
   firstFormGroup = this._formBuilder.group({
     name: ['', Validators.required],
-    url: ['', Validators.required],
+    url: ['', [Validators.required, Validators.pattern(/^(https?:\/\/)?([\w\-]+\.)+[\w\-]+(\/[\w\-._~:/?#[\]@!$&'()*+,;=]*)?$/)]],
     language_id: [0, Validators.required],
     language_version_id: [{ value: 0, disabled: true }, Validators.required],
   });
@@ -68,6 +69,8 @@ export class RegisterReposComponent implements OnInit {
   projectId!: string | null;
 
   @ViewChild('stepper') stepper!: MatStepper;
+
+  matcher = new FormErrorStateMatcher();
 
   constructor(
     private languageFacade: LanguageFacade,
