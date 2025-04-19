@@ -1,17 +1,19 @@
 <div class="text-white bg-blue-600 px-4 py-5 flex justify-between border-white border-b">
   <h1 class="font-semibold text-2xl">
-    <a [routerLink]="['/admin']">
+    <a [routerLink]="[simpleHeader ? '/' : '/admin']">
       QuuD
     </a>
   </h1>
-  <div mat-button [matMenuTriggerFor]="menu" class="cursor-pointer">
-    @if(userInfo) {
-      {{ userInfo.names }} {{ userInfo.last_names }}
-    }
-    <icon class="text-white" [path]="mdiMenuDown"></icon>
-  </div>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="openDialog()">User Profile</button>
-    <button mat-menu-item (click)="logoutUser()">Log Out</button>
-  </mat-menu>
+  @if(!simpleHeader) {
+    <div mat-button [matMenuTriggerFor]="menu" class="cursor-pointer">
+      @if(userInfo) {
+        {{ userInfo.names }} {{ userInfo.last_names }}
+      }
+      <icon class="text-white" [path]="mdiMenuDown"></icon>
+    </div>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="openDialog()">User Profile</button>
+      <button mat-menu-item (click)="logoutUser()">Log Out</button>
+    </mat-menu>
+  }
 </div>

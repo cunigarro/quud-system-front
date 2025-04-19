@@ -18,6 +18,7 @@ import { Profile } from '../../../../shared/models/profile.model';
 export class HeaderComponent {
   mdiMenuDown: string = mdiMenuDown;
   @Input() userInfo!: Profile | null;
+  @Input() simpleHeader = false;
   readonly dialog = inject(MatDialog);
 
   constructor(private authFacade: AuthFacade, private router: Router) {}
