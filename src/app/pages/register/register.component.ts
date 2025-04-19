@@ -1,20 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthFacade } from '../../shared/facades/auth.facade';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { ErrorStateMatcher } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { SHARED_IMPORTS } from '../../shared/shared.imports';
 import { mdiEye, mdiEyeOff } from '@mdi/js';
-
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-  }
-}
+import { FormErrorStateMatcher } from '../../shared/utils/form-error-matcher';
 
 @Component({
   selector: 'app-register',
@@ -31,7 +24,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
-  matcher = new MyErrorStateMatcher();
+  matcher = new FormErrorStateMatcher();
   isLoading = false;
   showPassword = false;
   mdiEye = mdiEye;
