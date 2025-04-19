@@ -16,7 +16,8 @@ export class ProjectsFacade {
   }
 
   loadProjects(): Observable<Project[]> {
-    if (!this._projects()) {
+    // if (!this._projects()) { // TODO: Implement better cache
+    if(true) {
       return this.projectsService.projects()
         .pipe(
           tap((data) => this._projects.set(data))

@@ -7,7 +7,7 @@ import { RulesFacade } from '../../../../shared/facades/rules.facade';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CreateRulesGroupBody, Rule, RulesGroup } from '../../../../shared/models/rule.model';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { CreateRulesConfirmation } from '../../components/create-rules-confirmation/create-rules-confirmation.component';
+import { CreateRulesConfirmationComponent } from '../../components/create-rules-confirmation/create-rules-confirmation.component';
 
 @Component({
   templateUrl: './create-rules-group.component.html',
@@ -75,7 +75,7 @@ export class CreateRulesGroupComponent implements OnInit {
   }
 
   private openDialog(rulesGroup: RulesGroup): void {
-    const dialogRef = this.dialog.open(CreateRulesConfirmation, {
+    const dialogRef = this.dialog.open(CreateRulesConfirmationComponent, {
       data: rulesGroup
     });
 

@@ -29,7 +29,8 @@ export class RulesFacade {
   }
 
   loadRulesGroups() {
-    if(!this._rulesGroups()) {
+    // if(!this._rulesGroups()) { // TODO: Implement better cache
+    if(true) {
       this.rulesService.rulesGroups().subscribe({
         next: (rulesGroups) => {
           const groups = rulesGroups.map(rulesGroup => ({
@@ -42,7 +43,7 @@ export class RulesFacade {
           this._rulesGroups.set(groups);
         },
         error: (err) => console.error('Error loading rules groups', err),
-      })
+      });
     }
   }
 }

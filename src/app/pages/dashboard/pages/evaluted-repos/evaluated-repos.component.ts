@@ -6,6 +6,8 @@ import { Evaluation } from '../../../../shared/models/evaluation.model';
 import { RouterModule } from '@angular/router';
 import { LanguageFacade } from '../../../../shared/facades/language.facade';
 import { Language } from '../../../../shared/models/language.model';
+import { MatDialog } from '@angular/material/dialog';
+import { EvaluationDetailsComponent } from '../../components/evaluation-details/evaluation-details.component';
 
 @Component({
   templateUrl: './evaluated-repos.component.html',
@@ -21,6 +23,7 @@ export class EvaluatedReposComponent implements OnInit {
   private _languageFacade = inject(LanguageFacade);
   evaluations!: Signal<Evaluation[] | null>;
   languages!: Signal<Language[] | null>;
+  readonly dialog = inject(MatDialog);
 
   ngOnInit(): void {
     this._evaluationsFacade.loadEvaluations();
@@ -32,5 +35,11 @@ export class EvaluatedReposComponent implements OnInit {
 
   languageName(languageId: number) {
     return this.languages()?.find(language => language.id === languageId)?.name;
+  }
+
+  openDialog(evaluation: Evaluation) {
+    this.dialog.open(EvaluationDetailsComponent, {
+      data: evaluation
+    });
   }
 }

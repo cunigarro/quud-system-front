@@ -8,11 +8,11 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
-import { RulesGroup } from '../../../../shared/models/rule.model';
 import { JsonPipe } from '@angular/common';
+import { Evaluation } from '../../../../shared/models/evaluation.model';
 
 @Component({
-  templateUrl: './create-rules-confirmation.component.html',
+  templateUrl: './evaluation-details.component.html',
   standalone: true,
   imports: [
     MatButtonModule,
@@ -23,9 +23,9 @@ import { JsonPipe } from '@angular/common';
     JsonPipe
   ],
 })
-export class CreateRulesConfirmationComponent {
-  readonly dialogRef = inject(MatDialogRef<CreateRulesConfirmationComponent>);
-  readonly data = inject<RulesGroup>(MAT_DIALOG_DATA);
+export class EvaluationDetailsComponent {
+  readonly dialogRef = inject(MatDialogRef<EvaluationDetailsComponent>);
+  readonly data = inject<Evaluation>(MAT_DIALOG_DATA);
 
   onNoClick(): void {
     this.dialogRef.close();
