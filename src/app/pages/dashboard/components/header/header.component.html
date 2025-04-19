@@ -5,7 +5,9 @@
     </a>
   </h1>
   <div mat-button [matMenuTriggerFor]="menu" class="cursor-pointer">
-    Christian Unigarro
+    @if(userInfo) {
+      {{ userInfo.names }} {{ userInfo.last_names }}
+    }
     <icon class="text-white" [path]="mdiMenuDown"></icon>
   </div>
   <mat-menu #menu="matMenu">

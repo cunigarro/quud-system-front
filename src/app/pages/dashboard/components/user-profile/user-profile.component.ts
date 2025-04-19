@@ -1,4 +1,4 @@
-import { Component, inject, model } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import {
@@ -11,7 +11,8 @@ import {
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { RulesGroup } from '../../../../shared/models/rule.model';
+import { Profile } from '../../../../shared/models/profile.model';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   templateUrl: './user-profile.component.html',
@@ -25,11 +26,12 @@ import { RulesGroup } from '../../../../shared/models/rule.model';
     MatDialogContent,
     MatDialogActions,
     MatDialogClose,
+    JsonPipe
   ],
 })
 export class UserProfileComponent {
   readonly dialogRef = inject(MatDialogRef<UserProfileComponent>);
-  readonly data = inject<RulesGroup>(MAT_DIALOG_DATA);
+  readonly data = inject<Profile>(MAT_DIALOG_DATA);
 
   closeDialog(): void {
     this.dialogRef.close();

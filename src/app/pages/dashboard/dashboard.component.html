@@ -1,5 +1,7 @@
 <div class="min-h-screen flex flex-col">
-  <dashboard-header></dashboard-header>
+  <dashboard-header
+    [userInfo]="userInfo()"
+  ></dashboard-header>
   <div class="flex flex-1">
     <dashboard-sidebar></dashboard-sidebar>
     <main class="flex-1 p-6">
