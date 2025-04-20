@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { Profile } from '../../../../shared/models/profile.model';
 import { JsonPipe } from '@angular/common';
 import { ProfileFacade } from '../../../../shared/facades/profile.facade';
+import { FormErrorStateMatcher } from '../../../../shared/utils/form-error-matcher';
 
 @Component({
   templateUrl: './user-profile.component.html',
@@ -37,11 +38,12 @@ export class UserProfileComponent {
   private _fb = inject(FormBuilder);
   private _profileFacade = inject(ProfileFacade);
   profileMetadataForm!: FormGroup;
+  matcher = new FormErrorStateMatcher();
   showEditForm = false;
 
   ngOnInit(): void {
     this.profileMetadataForm =  this._fb.group({
-      profile_photo: ['', Validators.required],
+      profile_photo: ['', [Validators.required, Validators.pattern(/^(https?:\/\/)?([\w\-]+\.)+[\w\-]+(\/[\w\-._~:/?#[\]@!$&'()*+,;=]*)?$/)]],
       name_profile: ['', Validators.required],
       city: ['', Validators.required],
       country: ['', Validators.required],

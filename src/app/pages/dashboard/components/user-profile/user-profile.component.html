@@ -4,7 +4,10 @@
   <div class="flex items-center space-x-4">
     <img
       class="w-20 h-20 rounded-full"
-      [src]="userInfo()?.profile_metadata?.profile_photo || 'https://placehold.co/200'"
+      [src]="
+        userInfo()?.profile_metadata?.profile_photo ||
+        'https://placehold.co/200'
+      "
       alt="User Avatar"
     />
     <div>
@@ -15,7 +18,9 @@
   </div>
 
   <div class="mt-4 text-gray-700">
-    <p class="mb-1"><span class="font-semibold">Email:</span> {{ userInfo()?.email }}</p>
+    <p class="mb-1">
+      <span class="font-semibold">Email:</span> {{ userInfo()?.email }}
+    </p>
     @if(userInfo()?.profile_metadata?.name_profile) {
     <p class="mb-1">
       <span class="font-semibold">Profile Name:</span>
@@ -52,28 +57,59 @@
     (ngSubmit)="saveProfileMetadata()"
   >
     <mat-form-field appearance="fill" class="w-full mb-4">
-      <mat-label>Foto de perfil (URL)</mat-label>
-      <input matInput formControlName="profile_photo" />
+      <mat-label>Profile photo</mat-label>
+      <input
+        matInput
+        formControlName="profile_photo"
+        [errorStateMatcher]="matcher"
+      />
+      @if (profileMetadataForm.get('profile_photo')?.hasError('pattern') && !profileMetadataForm.get('profile_photo')?.hasError('required')) {
+        <mat-error>Must be a valid url</mat-error>
+      }
+      @if (profileMetadataForm.get('profile_photo')?.hasError('required')) {
+        <mat-error>Profile photo <strong>required</strong></mat-error>
+      }
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="w-full mb-4">
-      <mat-label>Nombre del perfil</mat-label>
-      <input matInput formControlName="name_profile" />
+      <mat-label>Profile name</mat-label>
+      <input
+        matInput
+        formControlName="name_profile"
+        [errorStateMatcher]="matcher"
+      />
+      @if (profileMetadataForm.get('name_profile')?.hasError('required')) {
+        <mat-error>Profile name <strong>required</strong></mat-error>
+      }
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="w-full mb-4">
-      <mat-label>Ciudad</mat-label>
-      <input matInput formControlName="city" />
+      <mat-label>City</mat-label>
+      <input matInput formControlName="city" [errorStateMatcher]="matcher" />
+      @if (profileMetadataForm.get('city')?.hasError('required')) {
+        <mat-error>City <strong>required</strong></mat-error>
+      }
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="w-full mb-4">
-      <mat-label>País</mat-label>
-      <input matInput formControlName="country" />
+      <mat-label>Country</mat-label>
+      <input matInput formControlName="country" [errorStateMatcher]="matcher" />
+      @if (profileMetadataForm.get('country')?.hasError('required')) {
+        <mat-error>Country <strong>required</strong></mat-error>
+      }
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="w-full mb-4">
-      <mat-label>Descripción de estado</mat-label>
-      <textarea matInput rows="3" formControlName="status_description"></textarea>
+      <mat-label>Status description</mat-label>
+      <textarea
+        matInput
+        rows="3"
+        formControlName="status_description"
+        [errorStateMatcher]="matcher"
+      ></textarea>
+      @if (profileMetadataForm.get('status_description')?.hasError('required')) {
+        <mat-error>Status description <strong>required</strong></mat-error>
+      }
     </mat-form-field>
 
     <div class="flex justify-end space-x-2">
