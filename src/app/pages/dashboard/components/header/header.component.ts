@@ -25,7 +25,8 @@ export class HeaderComponent {
 
   openDialog(): void {
     this.dialog.open(UserProfileComponent, {
-      data: this.userInfo
+      data: this.userInfo,
+      width: '600px'
     });
   }
 

@@ -7,6 +7,13 @@ export interface Profile {
   names: string;
   last_names: string;
   email: string;
-  profile_metadata: any;
+  profile_metadata: ProfileMetadata;
 }
 
+export interface ProfileMetadata {
+  profile_photo:  string;
+  name_profile: string;
+  city: string;
+  country: string;
+  status_description: string;
+}

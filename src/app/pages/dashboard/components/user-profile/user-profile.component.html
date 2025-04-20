@@ -1,32 +1,76 @@
 <h2 mat-dialog-title class="text-2xl font-bold text-gray-800">User Profile</h2>
-<mat-dialog-content class="p-4">
+
+<mat-dialog-content>
   <div class="flex items-center space-x-4">
     <img
       class="w-20 h-20 rounded-full"
-      src="https://placehold.co/200"
+      [src]="data.profile_metadata.profile_photo || 'https://placehold.co/200'"
       alt="User Avatar"
     />
     <div>
       <h3 class="text-xl font-semibold text-gray-800">
         {{ data.names }} {{ data.last_names }}
       </h3>
-      <p class="text-gray-500">Software Developer</p>
     </div>
   </div>
-  <div class="mt-4">
-    <p class="text-gray-700">
-      <span class="font-semibold">Email:</span>
-      {{ data.email }}
-    </p>
-    <p class="text-gray-700">
-      <span class="font-semibold">Location:</span> Bogotá D.C., Colombia
-    </p>
-    <p class="text-gray-700 mt-2">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod
-      bibendum laoreet.
-    </p>
+
+  <div class="mt-4 text-gray-700">
+    <p><span class="font-semibold">Email:</span> {{ data.email }}</p>
+    @if(data.profile_metadata.name_profile) {
+      <p><span class="font-semibold">Profile Name:</span> {{ data.profile_metadata.name_profile }}</p>
+    }
+    @if(data.profile_metadata.city) {
+      <p><span class="font-semibold">Ciudad:</span> {{ data.profile_metadata.city }}</p>
+    }
+    @if(data.profile_metadata.country) {
+      <p><span class="font-semibold">País:</span> {{ data.profile_metadata.country }}</p>
+    }
+    @if(data.profile_metadata.status_description) {
+      <p><span class="font-semibold">Status Description:</span> {{ data.profile_metadata.status_description }}</p>
+    }
   </div>
+
+  <div class="mt-4">
+    <button mat-stroked-button color="primary" (click)="toggleEdit()">
+      {{ showEditForm ? 'Cancelar' : 'Editar perfil' }}
+    </button>
+  </div>
+
+  @if(showEditForm) {
+    <form class="mt-4" [formGroup]="profileMetadataForm" (ngSubmit)="saveProfileMetadata()">
+      <mat-form-field appearance="fill" class="w-full mb-4">
+        <mat-label>Foto de perfil (URL)</mat-label>
+        <input matInput name="profile_photo" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full mb-4">
+        <mat-label>Nombre del perfil</mat-label>
+        <input matInput name="name_profile" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full mb-4">
+        <mat-label>Ciudad</mat-label>
+        <input matInput name="city" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full mb-4">
+        <mat-label>País</mat-label>
+        <input matInput name="country" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full mb-4">
+        <mat-label>Descripción de estado</mat-label>
+        <textarea matInput rows="3" name="status_description"></textarea>
+      </mat-form-field>
+
+      <div class="flex justify-end space-x-2">
+        <button mat-flat-button color="primary" type="submit">Guardar</button>
+        <button mat-button type="button" (click)="toggleEdit()">Cancelar</button>
+      </div>
+    </form>
+  }
 </mat-dialog-content>
+
 <mat-dialog-actions class="p-4 flex justify-end">
-  <button (click)="closeDialog()" mat-flat-button>Close</button>
+  <button (click)="closeDialog()" mat-flat-button>Cerrar</button>
 </mat-dialog-actions>

@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
+  MatDialogRef,
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
-  MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -20,6 +20,7 @@ import { JsonPipe } from '@angular/common';
   imports: [
     MatFormFieldModule,
     MatInputModule,
+    ReactiveFormsModule,
     FormsModule,
     MatButtonModule,
     MatDialogTitle,
@@ -32,6 +33,28 @@ import { JsonPipe } from '@angular/common';
 export class UserProfileComponent {
   readonly dialogRef = inject(MatDialogRef<UserProfileComponent>);
   readonly data = inject<Profile>(MAT_DIALOG_DATA);
+  private _fb = inject(FormBuilder);
+  profileMetadataForm!: FormGroup;
+  showEditForm = false;
+
+  ngOnInit(): void {
+    this.profileMetadataForm =  this._fb.group({
+      profile_photo: ['', Validators.required],
+      name_profile: ['', Validators.required],
+      city: ['', Validators.required],
+      country: ['', Validators.required],
+      status_description: ['', Validators.required]
+    });
+  }
+
+  toggleEdit(): void {
+    this.showEditForm = !this.showEditForm;
+  }
+
+  saveProfileMetadata(): void {
+    this.toggleEdit();
+
+  }
 
   closeDialog(): void {
     this.dialogRef.close();
