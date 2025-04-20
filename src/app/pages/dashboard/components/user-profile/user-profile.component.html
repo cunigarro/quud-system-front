@@ -15,59 +15,72 @@
   </div>
 
   <div class="mt-4 text-gray-700">
-    <p><span class="font-semibold">Email:</span> {{ data.email }}</p>
+    <p class="mb-1"><span class="font-semibold">Email:</span> {{ data.email }}</p>
     @if(data.profile_metadata.name_profile) {
-      <p><span class="font-semibold">Profile Name:</span> {{ data.profile_metadata.name_profile }}</p>
-    }
-    @if(data.profile_metadata.city) {
-      <p><span class="font-semibold">Ciudad:</span> {{ data.profile_metadata.city }}</p>
-    }
-    @if(data.profile_metadata.country) {
-      <p><span class="font-semibold">País:</span> {{ data.profile_metadata.country }}</p>
-    }
-    @if(data.profile_metadata.status_description) {
-      <p><span class="font-semibold">Status Description:</span> {{ data.profile_metadata.status_description }}</p>
+    <p class="mb-1">
+      <span class="font-semibold">Profile Name:</span>
+      {{ data.profile_metadata.name_profile }}
+    </p>
+    } @if(data.profile_metadata.city) {
+    <p class="mb-1">
+      <span class="font-semibold">Ciudad:</span>
+      {{ data.profile_metadata.city }}
+    </p>
+    } @if(data.profile_metadata.country) {
+    <p class="mb-1">
+      <span class="font-semibold">País:</span>
+      {{ data.profile_metadata.country }}
+    </p>
+    } @if(data.profile_metadata.status_description) {
+    <p class="mb-1">
+      <span class="font-semibold">Status Description:</span>
+      {{ data.profile_metadata.status_description }}
+    </p>
     }
   </div>
 
-  <div class="mt-4">
+  <div class="mt-4 overflow-hidden">
     <button mat-stroked-button color="primary" (click)="toggleEdit()">
-      {{ showEditForm ? 'Cancelar' : 'Editar perfil' }}
+      {{ showEditForm ? "Cancelar" : "Editar perfil" }}
     </button>
   </div>
 
   @if(showEditForm) {
-    <form class="mt-4" [formGroup]="profileMetadataForm" (ngSubmit)="saveProfileMetadata()">
-      <mat-form-field appearance="fill" class="w-full mb-4">
-        <mat-label>Foto de perfil (URL)</mat-label>
-        <input matInput name="profile_photo" />
-      </mat-form-field>
+  <form
+    class="mt-4"
+    [formGroup]="profileMetadataForm"
+    (ngSubmit)="saveProfileMetadata()"
+  >
+    <mat-form-field appearance="fill" class="w-full mb-4">
+      <mat-label>Foto de perfil (URL)</mat-label>
+      <input matInput name="profile_photo" />
+    </mat-form-field>
 
-      <mat-form-field appearance="fill" class="w-full mb-4">
-        <mat-label>Nombre del perfil</mat-label>
-        <input matInput name="name_profile" />
-      </mat-form-field>
+    <mat-form-field appearance="fill" class="w-full mb-4">
+      <mat-label>Nombre del perfil</mat-label>
+      <input matInput name="name_profile" />
+    </mat-form-field>
 
-      <mat-form-field appearance="fill" class="w-full mb-4">
-        <mat-label>Ciudad</mat-label>
-        <input matInput name="city" />
-      </mat-form-field>
+    <mat-form-field appearance="fill" class="w-full mb-4">
+      <mat-label>Ciudad</mat-label>
+      <input matInput name="city" />
+    </mat-form-field>
 
-      <mat-form-field appearance="fill" class="w-full mb-4">
-        <mat-label>País</mat-label>
-        <input matInput name="country" />
-      </mat-form-field>
+    <mat-form-field appearance="fill" class="w-full mb-4">
+      <mat-label>País</mat-label>
+      <input matInput name="country" />
+    </mat-form-field>
 
-      <mat-form-field appearance="fill" class="w-full mb-4">
-        <mat-label>Descripción de estado</mat-label>
-        <textarea matInput rows="3" name="status_description"></textarea>
-      </mat-form-field>
+    <mat-form-field appearance="fill" class="w-full mb-4">
+      <mat-label>Descripción de estado</mat-label>
+      <textarea matInput rows="3" name="status_description"></textarea>
+    </mat-form-field>
 
-      <div class="flex justify-end space-x-2">
-        <button mat-flat-button color="primary" type="submit">Guardar</button>
-        <button mat-button type="button" (click)="toggleEdit()">Cancelar</button>
-      </div>
-    </form>
+    <div class="flex justify-end space-x-2">
+      <button mat-flat-button color="primary" type="submit">Guardar</button>
+      <button mat-button type="button" (click)="toggleEdit()">Cancelar</button>
+    </div>
+  </form>
   }
 </mat-dialog-content>
 
