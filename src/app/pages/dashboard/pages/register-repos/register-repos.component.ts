@@ -1,4 +1,4 @@
-import { Component, effect, inject, OnInit, signal, Signal, ViewChild } from '@angular/core';
+import { Component, effect, inject, Injector, OnInit, runInInjectionContext, signal, Signal, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   Validators,
@@ -73,6 +73,8 @@ export class RegisterReposComponent implements OnInit {
 
   matcher = new FormErrorStateMatcher();
 
+  private injector = inject(Injector);
+
   constructor(
     private languageFacade: LanguageFacade,
     private projectsFacade: ProjectsFacade
@@ -84,6 +86,20 @@ export class RegisterReposComponent implements OnInit {
 
     this._rulesFacade.loadRulesGroups();
     this.rulesGroups = this._rulesFacade.rulesGroups;
+
+    runInInjectionContext(this.injector, () => {
+      effect(() => {
+        const groups = this.rulesGroups();
+        const control = this.secondFormGroup.get('rule_group_id');
+        if (!control) return;
+
+        if (!groups || groups.length === 0) {
+          control.disable({ emitEvent: false });
+        } else {
+          control.enable({ emitEvent: false });
+        }
+      });
+    });
 
     this.firstFormGroup.get('language_id')?.valueChanges.subscribe(selectedId => {
       const lang = this.languages()?.find(l => l.id === selectedId);

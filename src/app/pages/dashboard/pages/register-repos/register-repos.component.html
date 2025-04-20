@@ -74,7 +74,6 @@
           <mat-form-field>
             <mat-label>Quality Rules Group</mat-label>
             <mat-select
-              [disabled]="rulesGroups()?.length == 0"
               formControlName="rule_group_id"
               [errorStateMatcher]="matcher"
             >
