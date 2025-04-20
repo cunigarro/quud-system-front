@@ -14,7 +14,7 @@ export class AuthFacade {
   registerUser(data: RegisterUserBody): Observable<Register> {
     return this.authService.register(data).pipe(
       map((authData: RegisterResponse) => ({
-        token: authData.data.access_token
+        token: authData.data.user.access_token
       })),
       tap(data => {
         localStorage.setItem('token', data.token);

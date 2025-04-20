@@ -1,4 +1,4 @@
-import { ApiResponse } from "./api.model";
+import { ApiResponse } from './api.model';
 
 export interface RegisterUserBody {
   name: string;
@@ -13,7 +13,11 @@ export interface LoginBody {
   password: string;
 }
 
-export type RegisterResponse = ApiResponse<{ access_token: string }>;
+export type RegisterResponse = ApiResponse<{
+  user: {
+    access_token: string;
+  };
+}>;
 
 export type LoginResponse = ApiResponse<{ access_token: string }>;
 
