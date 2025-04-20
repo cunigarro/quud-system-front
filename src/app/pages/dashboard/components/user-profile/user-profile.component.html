@@ -4,37 +4,37 @@
   <div class="flex items-center space-x-4">
     <img
       class="w-20 h-20 rounded-full"
-      [src]="data.profile_metadata.profile_photo || 'https://placehold.co/200'"
+      [src]="userInfo()?.profile_metadata?.profile_photo || 'https://placehold.co/200'"
       alt="User Avatar"
     />
     <div>
       <h3 class="text-xl font-semibold text-gray-800">
-        {{ data.names }} {{ data.last_names }}
+        {{ userInfo()?.names }} {{ userInfo()?.last_names }}
       </h3>
     </div>
   </div>
 
   <div class="mt-4 text-gray-700">
-    <p class="mb-1"><span class="font-semibold">Email:</span> {{ data.email }}</p>
-    @if(data.profile_metadata.name_profile) {
+    <p class="mb-1"><span class="font-semibold">Email:</span> {{ userInfo()?.email }}</p>
+    @if(userInfo()?.profile_metadata?.name_profile) {
     <p class="mb-1">
       <span class="font-semibold">Profile Name:</span>
-      {{ data.profile_metadata.name_profile }}
+      {{ userInfo()?.profile_metadata?.name_profile }}
     </p>
-    } @if(data.profile_metadata.city) {
+    } @if(userInfo()?.profile_metadata?.city) {
     <p class="mb-1">
       <span class="font-semibold">Ciudad:</span>
-      {{ data.profile_metadata.city }}
+      {{ userInfo()?.profile_metadata?.city }}
     </p>
-    } @if(data.profile_metadata.country) {
+    } @if(userInfo()?.profile_metadata?.country) {
     <p class="mb-1">
       <span class="font-semibold">País:</span>
-      {{ data.profile_metadata.country }}
+      {{ userInfo()?.profile_metadata?.country }}
     </p>
-    } @if(data.profile_metadata.status_description) {
+    } @if(userInfo()?.profile_metadata?.status_description) {
     <p class="mb-1">
       <span class="font-semibold">Status Description:</span>
-      {{ data.profile_metadata.status_description }}
+      {{ userInfo()?.profile_metadata?.status_description }}
     </p>
     }
   </div>

@@ -33,7 +33,7 @@ import { ProfileFacade } from '../../../../shared/facades/profile.facade';
 })
 export class UserProfileComponent {
   readonly dialogRef = inject(MatDialogRef<UserProfileComponent>);
-  readonly data = inject<Profile>(MAT_DIALOG_DATA);
+  readonly userInfo = inject(ProfileFacade).userInfo;
   private _fb = inject(FormBuilder);
   private _profileFacade = inject(ProfileFacade);
   profileMetadataForm!: FormGroup;
@@ -47,6 +47,8 @@ export class UserProfileComponent {
       country: ['', Validators.required],
       status_description: ['', Validators.required]
     });
+
+    this.profileMetadataForm.setValue(this.userInfo()!.profile_metadata);
   }
 
   toggleEdit(): void {
@@ -60,7 +62,8 @@ export class UserProfileComponent {
     }
 
     this._profileFacade.saveProfile(this.profileMetadataForm.value)
-      .subscribe(() => {
+      .subscribe(data => {
+        this.profileMetadataForm.setValue(data.profile_metadata);
         this.toggleEdit();
       });
   }
