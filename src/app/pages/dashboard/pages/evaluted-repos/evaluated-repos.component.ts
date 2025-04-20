@@ -8,6 +8,7 @@ import { LanguageFacade } from '../../../../shared/facades/language.facade';
 import { Language } from '../../../../shared/models/language.model';
 import { MatDialog } from '@angular/material/dialog';
 import { EvaluationDetailsComponent } from '../../components/evaluation-details/evaluation-details.component';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   templateUrl: './evaluated-repos.component.html',
@@ -15,7 +16,8 @@ import { EvaluationDetailsComponent } from '../../components/evaluation-details/
   imports: [
     MatCardModule,
     MatButtonModule,
-    RouterModule
+    RouterModule,
+    JsonPipe
   ],
 })
 export class EvaluatedReposComponent implements OnInit {

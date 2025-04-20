@@ -1,4 +1,4 @@
-import { Component, inject, model, OnInit, signal, Signal } from '@angular/core';
+import { Component, effect, inject, OnInit, Signal } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';

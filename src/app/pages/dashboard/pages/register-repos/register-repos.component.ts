@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal, Signal, ViewChild } from '@angular/core';
+import { Component, effect, inject, OnInit, signal, Signal, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   Validators,
@@ -83,6 +83,18 @@ export class RegisterReposComponent implements OnInit {
 
     this._rulesFacade.loadRulesGroups();
     this.rulesGroups = this._rulesFacade.rulesGroups;
+
+    effect(() => {
+      const groups = this.rulesGroups();
+      const control = this.secondFormGroup.get('rule_group_id');
+      if (!control) return;
+
+      if (!groups || groups.length === 0) {
+        control.disable({ emitEvent: false });
+      } else {
+        control.enable({ emitEvent: false });
+      }
+    });
 
     this.firstFormGroup.get('language_id')?.valueChanges.subscribe(selectedId => {
       const lang = this.languages()?.find(l => l.id === selectedId);
