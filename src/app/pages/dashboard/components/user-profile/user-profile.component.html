@@ -3,10 +3,10 @@
 <mat-dialog-content>
   <div class="flex items-center space-x-4">
     <img
-      class="w-20 h-20 rounded-full"
+      class="w-20 h-20 rounded-full bgr-white"
       [src]="
         userInfo()?.profile_metadata?.profile_photo ||
-        'https://placehold.co/200'
+        '/assets/images/default-profile-photo.png'
       "
       alt="User Avatar"
     />

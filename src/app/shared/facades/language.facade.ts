@@ -26,4 +26,8 @@ export class LanguageFacade {
       });
     }
   }
+
+  reset() {
+    this._languages.set(null);
+  }
 }

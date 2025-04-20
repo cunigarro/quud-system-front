@@ -36,4 +36,8 @@ export class EvaluationsFacade {
       })
     ).subscribe();
   }
+
+  reset() {
+    this._evaluations.set(null);
+  }
 }

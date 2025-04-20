@@ -25,4 +25,8 @@ export class InspectionsFacade {
 
     return of(this._inspections()!);
   }
+
+  reset() {
+    this._inspections.set(null);
+  }
 }

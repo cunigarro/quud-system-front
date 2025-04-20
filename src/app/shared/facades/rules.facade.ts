@@ -46,4 +46,9 @@ export class RulesFacade {
       });
     }
   }
+
+  reset() {
+    this._rules.set(null);
+    this._rulesGroups.set(null);
+  }
 }

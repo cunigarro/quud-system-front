@@ -35,4 +35,8 @@ export class ProjectsFacade {
 
     return of(project);
   }
+
+  reset() {
+    this._projects.set(null);
+  }
 }

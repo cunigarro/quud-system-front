@@ -2,10 +2,14 @@ import { Injectable } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { map, Observable, tap } from 'rxjs';
 import { Login, LoginBody, LoginResponse, Register, RegisterResponse, RegisterUserBody } from '../models/auth.model';
+import { AppStateResetService } from '../services/app-state-reset.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthFacade {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private appResetService: AppStateResetService
+  ) {}
 
   registerUser(data: RegisterUserBody): Observable<Register> {
     return this.authService.register(data).pipe(
@@ -33,6 +37,7 @@ export class AuthFacade {
     return this.authService.logout().pipe(
       tap(() => {
         localStorage.removeItem('token');
+        this.appResetService.resetAll();
       })
     );
   }

@@ -66,4 +66,20 @@ export class ProfileFacade {
     );
   }
 
+  reset() {
+    this._userInfo.set({
+      names: '',
+      last_names: '',
+      email: '',
+      id: 0,
+      profile_metadata: {
+        profile_photo: '',
+        name_profile: '',
+        city: '',
+        country: '',
+        status_description: ''
+      }
+    }); // TODO: Improve this way to reset the state
+    this._loaded.set(false);
+  }
 }
