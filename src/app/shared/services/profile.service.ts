@@ -16,4 +16,11 @@ export class ProfileService {
         map(res => res.data.user)
       );
   }
+
+  saveProfile(profile: Profile): Observable<Profile> {
+    return this.http.put<ProfileResponse>(this.baseUrl, profile)
+      .pipe(
+        map(res => res.data.user)
+      );
+  }
 }

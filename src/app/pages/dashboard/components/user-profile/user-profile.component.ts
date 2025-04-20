@@ -13,6 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Profile } from '../../../../shared/models/profile.model';
 import { JsonPipe } from '@angular/common';
+import { ProfileFacade } from '../../../../shared/facades/profile.facade';
 
 @Component({
   templateUrl: './user-profile.component.html',
@@ -34,6 +35,7 @@ export class UserProfileComponent {
   readonly dialogRef = inject(MatDialogRef<UserProfileComponent>);
   readonly data = inject<Profile>(MAT_DIALOG_DATA);
   private _fb = inject(FormBuilder);
+  private _profileFacade = inject(ProfileFacade);
   profileMetadataForm!: FormGroup;
   showEditForm = false;
 
@@ -52,8 +54,15 @@ export class UserProfileComponent {
   }
 
   saveProfileMetadata(): void {
-    this.toggleEdit();
+    if (this.profileMetadataForm.invalid) {
+      this.profileMetadataForm.markAllAsTouched();
+      return;
+    }
 
+    this._profileFacade.saveProfile(this.profileMetadataForm.value)
+      .subscribe(() => {
+        this.toggleEdit();
+      });
   }
 
   closeDialog(): void {

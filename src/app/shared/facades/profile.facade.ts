@@ -1,6 +1,7 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { ProfileService } from '../services/profile.service';
-import { Profile } from '../models/profile.model';
+import { Profile, ProfileMetadata } from '../models/profile.model';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ProfileFacade {
@@ -37,11 +38,32 @@ export class ProfileFacade {
             }
           });
 
-          console.log(this._userInfo());
           this._loaded.set(true);
         },
         error: (err) => console.error('Error loading user info', err),
       });
     }
   }
+
+  saveProfile(body: ProfileMetadata) {
+    const current = this._userInfo();
+
+    const profile: Profile = {
+      id: current!.id,
+      names: current!.names,
+      last_names: current!.last_names,
+      email: current!.email,
+      profile_metadata: {
+        ...current!.profile_metadata,
+        ...body
+      }
+    };
+
+    return this._profileService.saveProfile(profile).pipe(
+      tap((data) => {
+        this._userInfo.set(data);
+      })
+    );
+  }
+
 }
