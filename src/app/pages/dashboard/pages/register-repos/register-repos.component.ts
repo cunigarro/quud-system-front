@@ -16,7 +16,7 @@ import { LanguageFacade } from '../../../../shared/facades/language.facade';
 import { Language, LanguageVersion } from '../../../../shared/models/language.model';
 import { ProjectsFacade } from '../../../../shared/facades/projects.facade';
 import { CreateProjectBody } from '../../../../shared/models/project.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { RulesFacade } from '../../../../shared/facades/rules.facade';
 import { InspectionsFacade } from '../../../../shared/facades/inspections.facade';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
@@ -39,7 +39,8 @@ import { FormErrorStateMatcher } from '../../../../shared/utils/form-error-match
     MatIconModule,
     MatSelectModule,
     AsyncPipe,
-    JsonPipe
+    JsonPipe,
+    RouterModule
   ],
 })
 export class RegisterReposComponent implements OnInit {
@@ -83,18 +84,6 @@ export class RegisterReposComponent implements OnInit {
 
     this._rulesFacade.loadRulesGroups();
     this.rulesGroups = this._rulesFacade.rulesGroups;
-
-    effect(() => {
-      const groups = this.rulesGroups();
-      const control = this.secondFormGroup.get('rule_group_id');
-      if (!control) return;
-
-      if (!groups || groups.length === 0) {
-        control.disable({ emitEvent: false });
-      } else {
-        control.enable({ emitEvent: false });
-      }
-    });
 
     this.firstFormGroup.get('language_id')?.valueChanges.subscribe(selectedId => {
       const lang = this.languages()?.find(l => l.id === selectedId);

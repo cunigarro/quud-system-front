@@ -73,7 +73,11 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>Quality Rules Group</mat-label>
-            <mat-select formControlName="rule_group_id" [errorStateMatcher]="matcher">
+            <mat-select
+              [disabled]="rulesGroups()?.length == 0"
+              formControlName="rule_group_id"
+              [errorStateMatcher]="matcher"
+            >
               <mat-option [value]="null" disabled>Select a rules group</mat-option>
               @if(rulesGroups()) {
                 @for (rulesGroup of rulesGroups(); track rulesGroup.id) {
@@ -83,6 +87,9 @@
             </mat-select>
             @if (secondFormGroup.get('rule_group_id')?.hasError('required')) {
               <mat-error>Rules group is <strong>required</strong></mat-error>
+            }
+            @if(rulesGroups()?.length == 0) {
+              <mat-hint>There is not rules created, go to <a class="text-blue-600 underline hover:no-underline" [routerLink]="['/admin/create-rules-group']">Create rules groups</a></mat-hint>
             }
           </mat-form-field>
         </div>
