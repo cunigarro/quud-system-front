@@ -13,6 +13,32 @@
       <textarea formControlName="description" rows="3" matInput placeholder="Add rules description"></textarea>
     </mat-form-field>
 
+    <div class="space-y-4">
+      @for (dimension of groupedRules() | keyvalue; track dimension.key) {
+        <div>
+          <h2 class="text-lg font-bold mb-2">{{ dimension.key }}</h2>
+
+          @let ruleTypes = dimension.value | keyvalue;
+          @for (ruleType of ruleTypes; track ruleType.key) {
+            <div class="ml-4">
+              <h3 class="text-base font-semibold mb-1">{{ ruleType.key }}</h3>
+
+              @let rules = ruleType.value;
+              <mat-chip-listbox formControlName="rule_ids" multiple>
+                @if (rules) {
+                  @for (rule of rules; track rule.id) {
+                    <mat-chip-option [value]="rule.id">
+                      {{ rule.name }}
+                    </mat-chip-option>
+                  }
+                }
+              </mat-chip-listbox>
+            </div>
+          }
+        </div>
+      }
+    </div>
+
     <div class="w-full">
       <mat-label>Rules</mat-label>
       <mat-chip-listbox formControlName="rule_ids" multiple>

@@ -22,6 +22,18 @@ export interface RulesGroup {
 export interface Rule {
   id: number;
   name: string;
+  rule_type: RuleType
 }
 
+export interface RuleType {
+  id: number;
+  name: string;
+  dimension: string;
+}
+
+export interface GroupedRules {
+  [dimension: string]: {
+    [ruleType: string]: Rule[];
+  };
+}
 

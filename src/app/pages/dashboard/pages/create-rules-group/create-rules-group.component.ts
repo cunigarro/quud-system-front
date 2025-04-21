@@ -1,13 +1,14 @@
-import { Component, effect, inject, OnInit, Signal } from '@angular/core';
+import { Component, inject, OnInit, Signal } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonModule } from '@angular/material/button';
 import { RulesFacade } from '../../../../shared/facades/rules.facade';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CreateRulesGroupBody, Rule, RulesGroup } from '../../../../shared/models/rule.model';
+import { CreateRulesGroupBody, GroupedRules, Rule, RulesGroup } from '../../../../shared/models/rule.model';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CreateRulesConfirmationComponent } from '../../components/create-rules-confirmation/create-rules-confirmation.component';
+import { JsonPipe, KeyValuePipe } from '@angular/common';
 
 @Component({
   templateUrl: './create-rules-group.component.html',
@@ -19,7 +20,9 @@ import { CreateRulesConfirmationComponent } from '../../components/create-rules-
     MatChipsModule,
     MatButtonModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+    JsonPipe,
+    KeyValuePipe
   ],
 })
 export class CreateRulesGroupComponent implements OnInit {
@@ -31,6 +34,7 @@ export class CreateRulesGroupComponent implements OnInit {
   });
   rulesFacade = inject(RulesFacade);
   rules!: Signal<Rule[] | null>;
+  groupedRules!: Signal<GroupedRules | null>;
   selectedRules: string[] = [];
   readonly dialog = inject(MatDialog);
 
@@ -39,6 +43,7 @@ export class CreateRulesGroupComponent implements OnInit {
   ngOnInit(): void {
     this.rulesFacade.loadRules();
     this.rules = this.rulesFacade.rules;
+    this.groupedRules = this.rulesFacade.groupedRules;
   }
 
   toggleSelection(item: string): void {

@@ -1,7 +1,7 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { RulesService } from '../services/rules.service';
 import { Observable } from 'rxjs';
-import { CreateRulesGroupBody, Rule, RulesGroup } from '../models/rule.model';
+import { CreateRulesGroupBody, GroupedRules, Rule, RulesGroup } from '../models/rule.model';
 
 @Injectable({ providedIn: 'root' })
 export class RulesFacade {
@@ -9,6 +9,9 @@ export class RulesFacade {
 
   private _rules = signal<Rule[] | null>(null);
   readonly rules = computed(() => this._rules());
+
+  private _groupedRules = signal<GroupedRules | null>(null);
+  readonly groupedRules = computed(() => this._groupedRules());
 
   private _rulesGroups = signal<RulesGroup[] | null>(null);
   readonly rulesGroups = computed(() => this._rulesGroups());
@@ -21,11 +24,30 @@ export class RulesFacade {
     if (!this._rules()) {
       this.rulesService.rules().subscribe({
         next: (rules) => {
-          this._rules.set(rules)
+          this._rules.set(rules);
+          this._groupedRules.set(this.groupRulesByDimensionAndType(rules));
         },
         error: (err) => console.error('Error loading rules', err),
       });
     }
+  }
+
+  groupRulesByDimensionAndType(rules: Rule[]): GroupedRules {
+    return rules.reduce((acc, rule) => {
+      const { dimension, name: ruleTypeName } = rule.rule_type;
+
+      if (!acc[dimension]) {
+        acc[dimension] = {};
+      }
+
+      if (!acc[dimension][ruleTypeName]) {
+        acc[dimension][ruleTypeName] = [];
+      }
+
+      acc[dimension][ruleTypeName].push(rule);
+
+      return acc;
+    }, {} as GroupedRules);
   }
 
   loadRulesGroups() {
@@ -37,7 +59,8 @@ export class RulesFacade {
             ...rulesGroup,
             group_rules: rulesGroup.group_rules.map(rule => ({
               id: rule.id,
-              name: (rule as any).rule.name // TODO: Fix rules groups model
+              name: (rule as any).rule.name, // TODO: Fix rules groups model
+              rule_type: rule.rule_type
             }))
           }))
           this._rulesGroups.set(groups);
