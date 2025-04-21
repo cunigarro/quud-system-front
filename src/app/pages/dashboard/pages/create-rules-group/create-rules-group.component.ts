@@ -153,4 +153,25 @@ export class CreateRulesGroupComponent implements OnInit {
 
     return parseFloat(sum.toFixed(4));
   });
+
+  sumOfParadigmWeights = computed(() => {
+    const weights = this.weightsByRuleType();
+    const grouped = this.groupedRules();
+
+    if (!grouped) return 0;
+
+    let sum = 0;
+
+    Object.entries(grouped).forEach(([dimension, types]) => {
+      if (dimension !== 'paradigm') return;
+      Object.values(types).forEach(rules => {
+        const ruleTypeId = rules[0]?.rule_type.id;
+        if (ruleTypeId !== undefined) {
+          sum += weights[ruleTypeId] ?? 0;
+        }
+      });
+    });
+
+    return parseFloat(sum.toFixed(4));
+  });
 }

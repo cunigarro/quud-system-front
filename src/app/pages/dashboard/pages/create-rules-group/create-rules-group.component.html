@@ -47,11 +47,16 @@
                   >
                     <input [value]="weightsByRuleType()[ruleTypeId]"  (input)="onWeightChange(ruleTypeId, $event)" matSliderThumb />
                   </mat-slider>
-                  @if(sumOfAttributeWeights() !== 1) {
-                    <mat-error
-                      class="text-red-600 text-sm mt-2"
-                    >
-                      La suma de los pesos de los atributos debe ser exactamente 1.0. Actualmente: {{ sumOfAttributeWeights() }}
+                  @if (dimension.key === 'attribute' && sumOfAttributeWeights() !== 1) {
+                    <mat-error class="text-red-600 text-sm mt-2">
+                      La suma de los pesos de los atributos debe ser exactamente 1.0.
+                      Actualmente: {{ sumOfAttributeWeights() }}
+                    </mat-error>
+                  }
+                  @if (dimension.key === 'paradigm' && sumOfParadigmWeights() !== 1) {
+                    <mat-error class="text-red-600 text-sm mt-2">
+                      La suma de los pesos de los paradigmas debe ser exactamente 1.0.
+                      Actualmente: {{ sumOfParadigmWeights() }}
                     </mat-error>
                   }
                 }
