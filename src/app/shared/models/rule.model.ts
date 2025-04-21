@@ -6,12 +6,6 @@ export type RulesGroupResponse = ApiResponse<{ groups: RulesGroup[] }>;
 
 export type CretateRulesGroupResponse = ApiResponse<{ group: RulesGroup }>;
 
-export interface CreateRulesGroupBody {
-  name: string;
-  description: string;
-  rule_ids: [][];
-}
-
 export interface RulesGroup {
   id: number;
   name: string;
@@ -35,5 +29,19 @@ export interface GroupedRules {
   [dimension: string]: {
     [ruleType: string]: Rule[];
   };
+}
+
+export interface RuleWeight {
+  rule_type_id: number;
+  quantity: number;
+}
+
+export interface CreateRulesGroupBody {
+  name: string;
+  description: string;
+  rule_ids: number[];
+  alfa: number;
+  attributes_weights: RuleWeight[];
+  paradigm_weights: RuleWeight[];
 }
 

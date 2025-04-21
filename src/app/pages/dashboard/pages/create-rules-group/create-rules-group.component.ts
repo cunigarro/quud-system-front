@@ -1,11 +1,16 @@
-import { Component, inject, OnInit, Signal } from '@angular/core';
+import { Component, inject, OnInit, signal, Signal } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonModule } from '@angular/material/button';
 import { RulesFacade } from '../../../../shared/facades/rules.facade';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CreateRulesGroupBody, GroupedRules, Rule, RulesGroup } from '../../../../shared/models/rule.model';
+import {
+  GroupedRules,
+  Rule,
+  RulesGroup,
+  RuleWeight,
+} from '../../../../shared/models/rule.model';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CreateRulesConfirmationComponent } from '../../components/create-rules-confirmation/create-rules-confirmation.component';
 import { JsonPipe, KeyValuePipe, NgClass } from '@angular/common';
@@ -25,7 +30,7 @@ import { MatSliderModule } from '@angular/material/slider';
     JsonPipe,
     KeyValuePipe,
     MatSliderModule,
-    NgClass
+    NgClass,
   ],
 })
 export class CreateRulesGroupComponent implements OnInit {
@@ -33,14 +38,17 @@ export class CreateRulesGroupComponent implements OnInit {
   createRulesForm = this._formBuilder.group({
     name: ['', Validators.required],
     description: ['', Validators.required],
-    rule_ids: [[]]
+    rule_ids: [[]],
+    alfa: [0],
+    attributes_weights: [[]], // ✅ cambio aquí
+    paradigm_weights: [[]], // ✅ y aquí también
   });
   rulesFacade = inject(RulesFacade);
   rules!: Signal<Rule[] | null>;
+  weightsByRuleType = signal<Record<number, number>>({});
   groupedRules!: Signal<GroupedRules | null>;
   selectedRules: string[] = [];
   readonly dialog = inject(MatDialog);
-  sliderValue = 0;
 
   constructor() {}
 
@@ -70,22 +78,45 @@ export class CreateRulesGroupComponent implements OnInit {
     }
 
     const formValue = this.createRulesForm.value;
+    const weights = this.weightsByRuleType();
 
-    const body: CreateRulesGroupBody = {
-      name: formValue.name!,
-      description: formValue.description!,
-      rule_ids: formValue.rule_ids!
-    };
+    const attributes_weights: RuleWeight[] = [];
+    const paradigm_weights: RuleWeight[] = [];
 
-    this.rulesFacade.createRulesGroup(body)
-      .subscribe(rulesGroup => {
-        this.openDialog(rulesGroup);
+    Object.entries(this.groupedRules() || {}).forEach(([dimension, types]) => {
+      Object.values(types).forEach((rules) => {
+        const ruleTypeId = rules[0]?.rule_type.id;
+        if (ruleTypeId === undefined) return;
+
+        const weight = weights[ruleTypeId] ?? 0;
+
+        const entry: RuleWeight = {
+          rule_type_id: ruleTypeId,
+          quantity: weight,
+        };
+
+        if (dimension === 'attribute') {
+          attributes_weights.push(entry);
+        } else if (dimension === 'paradigm') {
+          paradigm_weights.push(entry);
+        }
       });
+    });
+
+    this.createRulesForm.patchValue({
+      attributes_weights: attributes_weights as any,
+      paradigm_weights: paradigm_weights as any,
+    });
+
+    const body: any = this.createRulesForm.value;
+    this.rulesFacade.createRulesGroup(body).subscribe((group) => {
+      this.openDialog(group);
+    });
   }
 
   private openDialog(rulesGroup: RulesGroup): void {
     const dialogRef = this.dialog.open(CreateRulesConfirmationComponent, {
-      data: rulesGroup
+      data: rulesGroup,
     });
 
     dialogRef.afterClosed().subscribe(() => {
@@ -93,7 +124,12 @@ export class CreateRulesGroupComponent implements OnInit {
     });
   }
 
-  onSliderChange(event: any) {
-    this.sliderValue = event.value;
+  onWeightChange(ruleTypeId: number | undefined, event: any) {
+    if (ruleTypeId === undefined) return;
+    const current = this.weightsByRuleType();
+    this.weightsByRuleType.set({
+      ...current,
+      [ruleTypeId]: event.value,
+    });
   }
 }

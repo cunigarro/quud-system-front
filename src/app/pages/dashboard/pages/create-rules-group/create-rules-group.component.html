@@ -35,9 +35,19 @@
                   }
                 </mat-chip-listbox>
 
-                <mat-slider min="0" max="100" step="1" discrete>
-                  <input matSliderThumb>
-                </mat-slider>
+                @let ruleTypeId = ruleType.value[0].rule_type.id;
+                @if (ruleTypeId !== undefined) {
+                  <mat-slider
+                    (change)="onWeightChange(ruleTypeId, $event)"
+                    min="0"
+                    max="100"
+                    step="1"
+                    thumbLabel
+                    class="w-full max-w-xs"
+                  >
+                    <input [value]="weightsByRuleType()[ruleTypeId]" matSliderThumb />
+                  </mat-slider>
+                }
               </div>
             }
           </div>
@@ -48,14 +58,13 @@
         <label class="text-lg font-bold mb-2">Attributes vs Paradigms</label>
         <mat-slider
           min="-100"
-          (change)="onSliderChange($event)"
           max="100"
           step="1"
           thumbLabel
           discrete
           tickInterval="50"
         >
-          <input [value]="sliderValue" matSliderThumb />
+          <input formControlName="alfa" matSliderThumb />
         </mat-slider>
 
         <div class="flex justify-between text-sm mt-1 px-1 text-gray-500">
