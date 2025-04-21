@@ -93,7 +93,7 @@ export class CreateRulesGroupComponent implements OnInit {
     });
   }
 
-  onSliderChange(value: number) {
-    this.sliderValue = value;
+  onSliderChange(event: any) {
+    this.sliderValue = event.value;
   }
 }
