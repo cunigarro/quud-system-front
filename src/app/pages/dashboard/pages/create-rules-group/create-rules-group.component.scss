@@ -1,3 +1,7 @@
 ::ng-deep .mat-mdc-chip-set .mdc-evolution-chip-set__chips {
   @apply grid grid-cols-3 gap-4 w-full;
 }
+
+mat-slider {
+  @apply min-w-96;
+}

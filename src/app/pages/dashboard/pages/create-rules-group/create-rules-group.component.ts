@@ -9,6 +9,7 @@ import { CreateRulesGroupBody, GroupedRules, Rule, RulesGroup } from '../../../.
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CreateRulesConfirmationComponent } from '../../components/create-rules-confirmation/create-rules-confirmation.component';
 import { JsonPipe, KeyValuePipe } from '@angular/common';
+import { MatSliderModule } from '@angular/material/slider';
 
 @Component({
   templateUrl: './create-rules-group.component.html',
@@ -22,7 +23,8 @@ import { JsonPipe, KeyValuePipe } from '@angular/common';
     ReactiveFormsModule,
     MatDialogModule,
     JsonPipe,
-    KeyValuePipe
+    KeyValuePipe,
+    MatSliderModule
   ],
 })
 export class CreateRulesGroupComponent implements OnInit {

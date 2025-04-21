@@ -23,6 +23,7 @@ html {
   @include mat.menu-theme($my-theme);
   @include mat.dialog-theme($my-theme);
   @include mat.chips-theme($my-theme);
+  @include mat.slider-theme($my-theme);
 }
 
 .mat-stepper-vertical,
