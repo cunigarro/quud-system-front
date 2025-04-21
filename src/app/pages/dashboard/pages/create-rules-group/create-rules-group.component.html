@@ -38,15 +38,22 @@
                 @let ruleTypeId = ruleType.value[0].rule_type.id;
                 @if (ruleTypeId !== undefined) {
                   <mat-slider
-                    (change)="onWeightChange(ruleTypeId, $event)"
+
                     min="0"
-                    max="100"
-                    step="1"
-                    thumbLabel
+                    max="1"
+                    step="0.1"
+                    discrete
                     class="w-full max-w-xs"
                   >
-                    <input [value]="weightsByRuleType()[ruleTypeId]" matSliderThumb />
+                    <input [value]="weightsByRuleType()[ruleTypeId]"  (input)="onWeightChange(ruleTypeId, $event)" matSliderThumb />
                   </mat-slider>
+                  @if(sumOfAttributeWeights() !== 1) {
+                    <mat-error
+                      class="text-red-600 text-sm mt-2"
+                    >
+                      La suma de los pesos de los atributos debe ser exactamente 1.0. Actualmente: {{ sumOfAttributeWeights() }}
+                    </mat-error>
+                  }
                 }
               </div>
             }
@@ -76,7 +83,7 @@
     </div>
 
     <div class="flex justify-end">
-      <button type="submit" mat-flat-button>Create</button>
+      <button type="submit" [disabled]="createRulesForm.invalid || sumOfAttributeWeights() !== 1" mat-flat-button>Create</button>
     </div>
   </form>
 </div>

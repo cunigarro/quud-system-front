@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal, Signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal, Signal } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
@@ -129,7 +129,28 @@ export class CreateRulesGroupComponent implements OnInit {
     const current = this.weightsByRuleType();
     this.weightsByRuleType.set({
       ...current,
-      [ruleTypeId]: event.value,
+      [ruleTypeId]: Number(event.target.value),
     });
   }
+
+  sumOfAttributeWeights = computed(() => {
+    const weights = this.weightsByRuleType();
+    const grouped = this.groupedRules();
+
+    if (!grouped) return 0;
+
+    let sum = 0;
+
+    Object.entries(grouped).forEach(([dimension, types]) => {
+      if (dimension !== 'attribute') return;
+      Object.values(types).forEach(rules => {
+        const ruleTypeId = rules[0]?.rule_type.id;
+        if (ruleTypeId !== undefined) {
+          sum += weights[ruleTypeId] ?? 0;
+        }
+      });
+    });
+
+    return parseFloat(sum.toFixed(4));
+  });
 }
