@@ -83,7 +83,7 @@
     </div>
 
     <div class="flex justify-end">
-      <button type="submit" [disabled]="createRulesForm.invalid || sumOfAttributeWeights() !== 1" mat-flat-button>Create</button>
+      <button type="submit" [disabled]="sumOfAttributeWeights() !== 1" mat-flat-button>Create</button>
     </div>
   </form>
 </div>
