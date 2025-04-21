@@ -8,7 +8,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CreateRulesGroupBody, GroupedRules, Rule, RulesGroup } from '../../../../shared/models/rule.model';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CreateRulesConfirmationComponent } from '../../components/create-rules-confirmation/create-rules-confirmation.component';
-import { JsonPipe, KeyValuePipe } from '@angular/common';
+import { JsonPipe, KeyValuePipe, NgClass } from '@angular/common';
 import { MatSliderModule } from '@angular/material/slider';
 
 @Component({
@@ -24,7 +24,8 @@ import { MatSliderModule } from '@angular/material/slider';
     MatDialogModule,
     JsonPipe,
     KeyValuePipe,
-    MatSliderModule
+    MatSliderModule,
+    NgClass
   ],
 })
 export class CreateRulesGroupComponent implements OnInit {
@@ -39,6 +40,7 @@ export class CreateRulesGroupComponent implements OnInit {
   groupedRules!: Signal<GroupedRules | null>;
   selectedRules: string[] = [];
   readonly dialog = inject(MatDialog);
+  sliderValue = 0;
 
   constructor() {}
 
@@ -89,5 +91,9 @@ export class CreateRulesGroupComponent implements OnInit {
     dialogRef.afterClosed().subscribe(() => {
       this.createRulesForm.reset();
     });
+  }
+
+  onSliderChange(value: number) {
+    this.sliderValue = value;
   }
 }

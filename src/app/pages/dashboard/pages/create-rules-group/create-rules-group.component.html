@@ -43,6 +43,27 @@
           </div>
         }
       </div>
+
+      <div class="w-full max-w-md mt-4">
+        <label class="text-lg font-bold mb-2">Attributes vs Paradigms</label>
+        <mat-slider
+          [value]="sliderValue"
+          min="-100"
+          max="100"
+          step="1"
+          thumbLabel
+          discrete
+          tickInterval="50"
+        >
+          <input matSliderThumb />
+        </mat-slider>
+
+        <div class="flex justify-between text-sm mt-1 px-1 text-gray-500">
+          <span>Attributes (-100)</span>
+          <span>Neutral (0)</span>
+          <span>Paradigms (+100)</span>
+        </div>
+      </div>
     </div>
 
     <div class="flex justify-end">
