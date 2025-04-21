@@ -18,11 +18,12 @@
             <mat-label>URL Repository</mat-label>
             <input matInput formControlName="url" [errorStateMatcher]="matcher" placeholder="https://ejemplo.com">
             @if (firstFormGroup.get('url')?.hasError('pattern') && !firstFormGroup.get('url')?.hasError('required')) {
-              <mat-error>Must be a valid url</mat-error>
+              <mat-error>Only GitHub, GitLab, or Bitbucket URLs are allowed</mat-error>
             }
             @if (firstFormGroup.get('url')?.hasError('required')) {
               <mat-error>Url Repository is <strong>required</strong></mat-error>
             }
+            <mat-hint>Enter a public repository</mat-hint>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Language</mat-label>

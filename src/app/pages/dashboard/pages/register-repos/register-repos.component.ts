@@ -57,7 +57,15 @@ export class RegisterReposComponent implements OnInit {
 
   firstFormGroup = this._formBuilder.group({
     name: ['', Validators.required],
-    url: ['', [Validators.required, Validators.pattern(/^(https?:\/\/)?([\w\-]+\.)+[\w\-]+(\/[\w\-._~:/?#[\]@!$&'()*+,;=]*)?$/)]],
+    url: [
+      '',
+      [
+        Validators.required,
+        Validators.pattern(
+          /^(https?:\/\/)?(www\.)?(github\.com|gitlab\.com|bitbucket\.org)\/[\w\-._~:/?#[\]@!$&'()*+,;=]+$/
+        )
+      ]
+    ],
     language_id: [null, Validators.required],
     language_version_id: [{ value: null, disabled: true }, Validators.required],
   });
